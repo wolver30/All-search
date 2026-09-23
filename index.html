@@ -1,0 +1,3759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AllSearch.com — What Every Website is Used For (Single-File AS.html)</title>
+  <meta name="description" content="AllSearch.com: Single standalone file with all code and 77+ websites indexed across the web. Discover which websites are best for what, with specialized hubs and instant query routing.">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            stone: {
+              50: '#fafaf9',
+              100: '#f5f5f4',
+              200: '#e7e5e4',
+              300: '#d6d3d1',
+              400: '#a8a29e',
+              500: '#78716c',
+              600: '#57534e',
+              700: '#44403c',
+              800: '#292524',
+              900: '#1c1917',
+              950: '#0c0a09',
+            },
+            amber: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              200: '#fde68a',
+              300: '#fcd34d',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+              700: '#b45309',
+              800: '#92400e',
+              900: '#78350f',
+              950: '#451a03',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Custom scrollbar and fallback styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f5f5f4;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #d6d3d1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a8a29e;
+    }
+    .badge-glow {
+      box-shadow: 0 0 15px -3px rgba(217, 119, 6, 0.25);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-stone-100 text-stone-900 font-sans antialiased flex flex-col selection:bg-amber-200 selection:text-amber-900">
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="bg-stone-900 text-stone-200 text-xs px-4 py-2 border-b border-stone-800 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto w-full flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+          SINGLE FILE: AS.HTML
+        </span>
+        <span class="text-stone-300 hidden sm:inline">
+          Complete self-contained AllSearch edition &bull; Zero build tools required &bull; Works offline
+        </span>
+      </div>
+      <div class="flex items-center gap-4 text-[11px] text-stone-400 font-mono">
+        <span>77 Websites Indexed</span>
+        <span>&bull;</span>
+        <span>18 Categories</span>
+        <span>&bull;</span>
+        <span class="text-amber-400">4 Specialized Hubs</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="bg-white/95 backdrop-blur border-b border-stone-200/80 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <!-- Logo -->
+      <a href="#home" onclick="switchTab('directory')" class="flex items-center gap-2.5 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center text-white font-black text-xl shadow-md group-hover:scale-105 transition-transform">
+          A
+        </div>
+        <div>
+          <div class="text-xl font-black tracking-tight flex items-center gap-1 leading-none text-stone-900">
+            <span>AllSearch</span>
+            <span class="text-amber-600">.com</span>
+          </div>
+          <p class="text-[10px] font-mono uppercase text-stone-500 tracking-wider">
+            Web Directory &amp; Specialized Search Router
+          </p>
+        </div>
+      </a>
+
+      <!-- View Navigation Tabs -->
+      <nav class="hidden md:flex items-center gap-1 bg-stone-100 p-1 rounded-xl border border-stone-200 text-xs font-semibold">
+        <button id="nav-btn-directory" onclick="switchTab('directory')" class="px-3.5 py-1.5 rounded-lg transition-all text-stone-900 bg-white shadow-sm">
+          All Websites (77)
+        </button>
+        <button id="nav-btn-specialized" onclick="switchTab('specialized')" class="px-3.5 py-1.5 rounded-lg transition-all text-stone-600 hover:text-stone-900">
+          Specialized Hubs (4)
+        </button>
+        <button id="nav-btn-decision" onclick="switchTab('decision')" class="px-3.5 py-1.5 rounded-lg transition-all text-stone-600 hover:text-stone-900">
+          Decision Guide
+        </button>
+        <button id="nav-btn-comparison" onclick="switchTab('comparison')" class="px-3.5 py-1.5 rounded-lg transition-all text-stone-600 hover:text-stone-900">
+          Comparison Table
+        </button>
+      </nav>
+
+      <!-- Quick Action Badges -->
+      <div class="flex items-center gap-2">
+        <button onclick="downloadSelf()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-stone-900 text-white hover:bg-stone-800 shadow transition-colors" title="Save this HTML file to your device">
+          <i data-lucide="download" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Save AS.html</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION WITH INTENT ANALYZER -->
+  <section class="bg-gradient-to-b from-stone-50 to-stone-100 border-b border-stone-200 py-10 sm:py-14 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 border border-amber-200 text-amber-900 text-xs font-semibold mb-4">
+        <i data-lucide="compass" class="w-3.5 h-3.5 text-amber-600"></i>
+        <span>The Universal Index of the Web</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-stone-900 leading-tight">
+        What is Every Website Used For?
+      </h1>
+      <p class="mt-3 text-stone-600 text-sm sm:text-base max-w-2xl mx-auto">
+        Type any query (e.g. <span class="font-semibold text-stone-900">everything</span>, <span class="font-semibold text-stone-900">coding</span>, <span class="font-semibold text-stone-900">gaming</span>, <span class="font-semibold text-stone-900">cars</span>, <span class="font-semibold text-stone-900">acronyms</span>) to see the best website for it and formulate direct searches.
+      </p>
+
+      <!-- Search Input Box -->
+      <div class="mt-8 relative max-w-3xl mx-auto">
+        <div class="flex items-center bg-white rounded-2xl shadow-lg border border-stone-200/80 overflow-hidden focus-within:ring-2 focus-within:ring-amber-500 focus-within:border-amber-500 transition-all p-1.5 sm:p-2">
+          <div class="pl-3 sm:pl-4 text-stone-400">
+            <i data-lucide="search" class="w-5 h-5 text-amber-600"></i>
+          </div>
+          <input 
+            type="text" 
+            id="global-search-input" 
+            placeholder="Search intent or website: e.g. 'coding', 'everything', 'Elden Ring boss', 'horsepower'..."
+            class="w-full px-3 py-2.5 sm:py-3 text-stone-900 text-sm sm:text-base outline-none bg-transparent placeholder-stone-400 font-medium"
+            oninput="handleSearchInput(this.value)"
+            onkeydown="if(event.key === 'Enter') handleSearchEnter()"
+          />
+          <button 
+            id="clear-search-btn" 
+            onclick="clearSearchInput()" 
+            class="hidden px-2 text-stone-400 hover:text-stone-600 text-sm font-semibold"
+          >
+            Clear
+          </button>
+          <button 
+            id="launch-search-btn" 
+            onclick="handleSearchEnter()" 
+            class="px-4 sm:px-6 py-2.5 sm:py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold text-sm rounded-xl transition-colors flex items-center gap-1.5 shadow-sm whitespace-nowrap"
+          >
+            <span>Analyze</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Sample Query Quick Buttons -->
+        <div class="mt-3 flex flex-wrap items-center justify-center gap-1.5 text-xs">
+          <span class="text-stone-400 font-mono text-[11px] mr-1">Quick Queries:</span>
+          <button onclick="setQueryAndAnalyze('everything')" class="px-2.5 py-1 bg-white hover:bg-amber-50 text-stone-700 hover:text-amber-900 rounded-md border border-stone-200 shadow-2xs transition-colors font-medium">
+            Everything
+          </button>
+          <button onclick="setQueryAndAnalyze('coding')" class="px-2.5 py-1 bg-white hover:bg-amber-50 text-stone-700 hover:text-amber-900 rounded-md border border-stone-200 shadow-2xs transition-colors font-medium">
+            Coding &amp; Dev
+          </button>
+          <button onclick="setQueryAndAnalyze('Elden Ring Malenia weaknesses & bleed build')" class="px-2.5 py-1 bg-white hover:bg-amber-50 text-stone-700 hover:text-amber-900 rounded-md border border-stone-200 shadow-2xs transition-colors font-medium">
+            Game Search (GS.com)
+          </button>
+          <button onclick="setQueryAndAnalyze('what does epistemic humility mean')" class="px-2.5 py-1 bg-white hover:bg-amber-50 text-stone-700 hover:text-amber-900 rounded-md border border-stone-200 shadow-2xs transition-colors font-medium">
+            DefSearch.net
+          </button>
+          <button onclick="setQueryAndAnalyze('2024 Honda Civic Type R specs')" class="px-2.5 py-1 bg-white hover:bg-amber-50 text-stone-700 hover:text-amber-900 rounded-md border border-stone-200 shadow-2xs transition-colors font-medium">
+            CarSearch.net
+          </button>
+          <button onclick="setQueryAndAnalyze('public s3 bucket climate parquet dataset')" class="px-2.5 py-1 bg-white hover:bg-amber-50 text-stone-700 hover:text-amber-900 rounded-md border border-stone-200 shadow-2xs transition-colors font-medium">
+            BlobSearch.com
+          </button>
+          <button onclick="setQueryAndAnalyze('buy noise cancelling headphones')" class="px-2.5 py-1 bg-white hover:bg-amber-50 text-stone-700 hover:text-amber-900 rounded-md border border-stone-200 shadow-2xs transition-colors font-medium">
+            Shopping
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Intent Analyzer Output Card -->
+      <div id="intent-result-card" class="mt-6 max-w-3xl mx-auto bg-white rounded-2xl border border-amber-200 p-5 shadow-sm text-left">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN TAB CONTENT CONTAINER -->
+  <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- VIEW 1: ALL WEBSITES DIRECTORY -->
+    <section id="tab-directory">
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-stone-200">
+        <div>
+          <div class="flex items-center gap-2">
+            <h2 class="text-2xl font-bold tracking-tight text-stone-900">
+              Web Directory &amp; Catalog
+            </h2>
+            <span id="directory-count-badge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200">
+              77 Websites
+            </span>
+          </div>
+          <p class="text-stone-500 text-xs sm:text-sm mt-1">
+            Click any website to inspect detailed specs, or sort by popularity score and launch year.
+          </p>
+        </div>
+
+        <!-- Directory Controls: Search Filter & Sort Selector -->
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="relative">
+            <input 
+              type="text" 
+              id="directory-filter-input" 
+              placeholder="Filter list by keyword..."
+              class="w-56 px-3 py-1.5 pl-8 text-xs rounded-lg border border-stone-300 bg-white text-stone-800 placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-amber-500"
+              oninput="handleDirectoryFilter(this.value)"
+            />
+            <i data-lucide="filter" class="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-2.5"></i>
+          </div>
+
+          <div class="flex items-center gap-1 bg-stone-100 p-1 rounded-lg border border-stone-300 text-xs">
+            <span class="text-stone-500 text-[11px] px-1 font-semibold">Sort:</span>
+            <button id="sort-btn-popularity" onclick="setSortMode('popularity')" class="px-2.5 py-1 rounded bg-white text-stone-900 font-semibold shadow-2xs">
+              Popularity
+            </button>
+            <button id="sort-btn-latest" onclick="setSortMode('latest')" class="px-2.5 py-1 rounded text-stone-600 hover:text-stone-900 font-semibold">
+              Latest Year
+            </button>
+            <button id="sort-btn-alpha" onclick="setSortMode('alpha')" class="px-2.5 py-1 rounded text-stone-600 hover:text-stone-900 font-semibold">
+              A &ndash; Z
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categories Pills Scroll Area -->
+      <div class="py-4 overflow-x-auto no-scrollbar flex items-center gap-1.5 border-b border-stone-200/80 mb-6" id="categories-pill-bar">
+        <!-- Rendered dynamically by JS -->
+      </div>
+
+      <!-- Websites Card Grid -->
+      <div id="websites-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- VIEW 2: 4 FEATURED SPECIALIZED HUBS -->
+    <section id="tab-specialized" class="hidden">
+      <div class="mb-8">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-800 border border-amber-500/20 mb-2">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-600"></i>
+          Specialized Search Engines Requested
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight">
+          Featured Specialized Search Hubs
+        </h2>
+        <p class="text-stone-600 text-sm mt-1 max-w-3xl">
+          Unlike generic engines that clutter results with affiliate blogs and SEO spam, these dedicated platforms specialize in deep structured data queries.
+        </p>
+      </div>
+
+      <!-- Specialized Hubs Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="specialized-hubs-grid">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- VIEW 3: DECISION GUIDE -->
+    <section id="tab-decision" class="hidden">
+      <div class="mb-8">
+        <h2 class="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight">
+          Decision Guide: Which Website Should You Use?
+        </h2>
+        <p class="text-stone-600 text-sm mt-1 max-w-2xl">
+          Quickly discover the top website for common developer, gamer, researcher, or everyday browsing tasks.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="decision-scenarios-grid">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- VIEW 4: COMPARISON TABLE -->
+    <section id="tab-comparison" class="hidden">
+      <div class="mb-8">
+        <h2 class="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight">
+          Specialized Hubs vs. Mainstream Search
+        </h2>
+        <p class="text-stone-600 text-sm mt-1 max-w-2xl">
+          Why specialized platforms outperform Google or Wikipedia for niche technical queries.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-stone-50 border-b border-stone-200 text-stone-600 font-mono text-xs uppercase">
+              <tr>
+                <th class="p-4">Specialized Hub</th>
+                <th class="p-4">Direct Domain</th>
+                <th class="p-4">Best For</th>
+                <th class="p-4">Why Google Falls Short</th>
+                <th class="p-4">Advantage</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-stone-100 text-stone-800">
+              <tr>
+                <td class="p-4 font-bold text-stone-900">Game Search</td>
+                <td class="p-4 font-mono text-xs text-amber-700">game-search.vercel.app (GS.com)</td>
+                <td class="p-4">Boss mechanics, item drop tables, speedrun skips</td>
+                <td class="p-4 text-xs text-stone-600">Flooded with 10-minute YouTube guides &amp; SEO affiliate articles</td>
+                <td class="p-4 text-xs font-semibold text-emerald-700">Instant stat tables, zero ad fluff</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-bold text-stone-900">DefSearch</td>
+                <td class="p-4 font-mono text-xs text-amber-700">def-search-5cpm.vercel.app (DefSearch.net)</td>
+                <td class="p-4">Technical acronyms, jargon definitions, etymology</td>
+                <td class="p-4 text-xs text-stone-600">Dictionary pop-up ads and multi-click pagination</td>
+                <td class="p-4 text-xs font-semibold text-emerald-700">Zero display ad bloat, instant phonetic roots</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-bold text-stone-900">CarSearch</td>
+                <td class="p-4 font-mono text-xs text-amber-700">car-search.netlify.app (CarSearch.net)</td>
+                <td class="p-4">Exact horsepower, 0-60, curb weight, drivetrain trim specs</td>
+                <td class="p-4 text-xs text-stone-600">Local dealership dealer ads &amp; lead-capture forms</td>
+                <td class="p-4 text-xs font-semibold text-emerald-700">Pure raw engine specs &amp; track test telemetry</td>
+              </tr>
+              <tr>
+                <td class="p-4 font-bold text-stone-900">BlobSearch</td>
+                <td class="p-4 font-mono text-xs text-amber-700">blob-search.vercel.app (BlobSearch.com)</td>
+                <td class="p-4">Public S3 buckets, Parquet datasets, binary dumps</td>
+                <td class="p-4 text-xs text-stone-600">Standard web spiders ignore unlinked object store prefixes</td>
+                <td class="p-4 text-xs font-semibold text-emerald-700">Direct S3/GCS prefix indexing &amp; raw dataset search</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- DETAIL MODAL -->
+  <div id="website-modal" class="fixed inset-0 z-50 bg-stone-950/60 backdrop-blur-xs hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl border border-stone-200 max-w-lg w-full overflow-hidden transform transition-all">
+      <div class="p-6 border-b border-stone-100 flex items-start justify-between">
+        <div>
+          <span id="modal-category" class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200">
+            Category
+          </span>
+          <h3 id="modal-title" class="text-2xl font-black text-stone-900 mt-2">
+            Website Name
+          </h3>
+          <p id="modal-domain" class="text-xs font-mono text-stone-500">
+            domain.com
+          </p>
+        </div>
+        <button onclick="closeWebsiteModal()" class="p-1 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-4 text-sm">
+        <div>
+          <span class="text-xs font-bold uppercase text-stone-400 block mb-1">What it's used for:</span>
+          <p id="modal-used-for" class="text-stone-800 leading-relaxed font-medium">
+            Description
+          </p>
+        </div>
+
+        <div>
+          <span class="text-xs font-bold uppercase text-stone-400 block mb-1">Key Strengths:</span>
+          <div id="modal-strengths" class="flex flex-wrap gap-1.5">
+            <!-- Strengths pills -->
+          </div>
+        </div>
+
+        <div class="pt-2 border-t border-stone-100 flex items-center justify-between text-xs text-stone-500 font-mono">
+          <span>Launched: <strong id="modal-year" class="text-stone-900">2020</strong></span>
+          <span>Popularity Rating: <strong id="modal-pop" class="text-stone-900">95/100</strong></span>
+        </div>
+      </div>
+
+      <div class="p-4 bg-stone-50 border-t border-stone-100 flex items-center justify-end gap-2">
+        <button onclick="closeWebsiteModal()" class="px-4 py-2 rounded-xl text-stone-600 hover:text-stone-900 text-xs font-semibold">
+          Close
+        </button>
+        <a id="modal-visit-link" href="#" target="_blank" rel="noopener noreferrer" class="px-5 py-2 rounded-xl bg-stone-900 text-white hover:bg-stone-800 text-xs font-semibold flex items-center gap-1.5 shadow-sm">
+          <span>Visit Website</span>
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-stone-200 mt-12 py-10 px-4 sm:px-6 lg:px-8 text-center text-xs text-stone-500">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>
+        <span class="font-bold text-stone-700">AllSearch.com (AS.html)</span>
+        <span>&mdash; Single-File Standalone Edition</span>
+      </div>
+      <div>
+        Specialized Hubs: 
+        <a href="https://game-search.vercel.app" target="_blank" class="underline hover:text-amber-700">GS.com</a> &bull;
+        <a href="https://def-search-5cpm.vercel.app" target="_blank" class="underline hover:text-amber-700">DefSearch.net</a> &bull;
+        <a href="https://car-search.netlify.app" target="_blank" class="underline hover:text-amber-700">CarSearch.net</a> &bull;
+        <a href="https://blob-search.vercel.app" target="_blank" class="underline hover:text-amber-700">BlobSearch.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- EMBEDDED COMPLETE DATASET & STANDALONE LOGIC -->
+  <script>
+    // Complete database of 77 websites across 18 categories
+    const ALL_WEBSITES = [
+  {
+    "id": "google",
+    "name": "Google",
+    "domain": "google.com",
+    "alias": "google.com",
+    "url": "https://www.google.com",
+    "category": "search-knowledge",
+    "categoryLabel": "Search & Knowledge",
+    "usedFor": "Used for universal global web search, indexing trillions of web pages, real-time web ranking, Google Images, Google News, and Knowledge Graph direct factual answers.",
+    "popularityScore": 100,
+    "launchYear": 1998,
+    "isLatest": false,
+    "keyStrengths": [
+      "World largest web index",
+      "Instant Knowledge Graph answers",
+      "Multimodal search & lens"
+    ],
+    "tags": [
+      "search",
+      "google",
+      "web search",
+      "lookup",
+      "find",
+      "everything",
+      "general",
+      "internet",
+      "index",
+      "engine"
+    ],
+    "searchUrlPattern": "https://www.google.com/search?q={q}",
+    "exampleQueries": [
+      "quantum computing breakthroughs",
+      "weather today",
+      "world population 2026"
+    ]
+  },
+  {
+    "id": "wikipedia",
+    "name": "Wikipedia",
+    "domain": "wikipedia.org",
+    "alias": "wikipedia.org",
+    "url": "https://www.wikipedia.org",
+    "category": "search-knowledge",
+    "categoryLabel": "Encyclopedia & Knowledge",
+    "usedFor": "Used for reading and community-editing a free multilingual encyclopedia with over 62 million peer-reviewed reference articles spanning all recorded human history and science.",
+    "popularityScore": 99,
+    "launchYear": 2001,
+    "isLatest": false,
+    "keyStrengths": [
+      "62+ million referenced articles",
+      "Completely free & ad-free",
+      "Crowdsourced citation verification"
+    ],
+    "tags": [
+      "encyclopedia",
+      "wikipedia",
+      "wiki",
+      "history",
+      "science",
+      "biography",
+      "reference",
+      "knowledge",
+      "facts",
+      "everything"
+    ],
+    "searchUrlPattern": "https://en.wikipedia.org/wiki/Special:Search?search={q}",
+    "exampleQueries": [
+      "James Webb Space Telescope",
+      "Renaissance art history",
+      "Theory of General Relativity"
+    ]
+  },
+  {
+    "id": "duckduckgo",
+    "name": "DuckDuckGo",
+    "domain": "duckduckgo.com",
+    "alias": "duckduckgo.com",
+    "url": "https://duckduckgo.com",
+    "category": "search-knowledge",
+    "categoryLabel": "Privacy Search",
+    "usedFor": "Used for privacy-first web searching that avoids personal tracking, cookie profiling, and search history retention while providing fast bang syntax shortcuts (!w, !g).",
+    "popularityScore": 94,
+    "launchYear": 2008,
+    "isLatest": false,
+    "keyStrengths": [
+      "Zero user search tracking",
+      "Bang shortcuts (!w !yt !gh)",
+      "Unbiased search results"
+    ],
+    "tags": [
+      "search",
+      "privacy",
+      "duckduckgo",
+      "no tracking",
+      "anonymous",
+      "bangs",
+      "private"
+    ],
+    "searchUrlPattern": "https://duckduckgo.com/?q={q}",
+    "exampleQueries": [
+      "!w Open Source Software",
+      "privacy tools list",
+      "rust vs go concurrency"
+    ]
+  },
+  {
+    "id": "def-search",
+    "name": "DefSearch",
+    "domain": "def-search-5cpm.vercel.app",
+    "alias": "DefSearch.net",
+    "url": "https://def-search-5cpm.vercel.app",
+    "category": "search-knowledge",
+    "categoryLabel": "Specialized Lexicon",
+    "usedFor": "Used for instant lexical definitions, technical jargon deciphering, obscure acronym expansions, and etymology without ad bloat or popups.",
+    "popularityScore": 87,
+    "launchYear": 2024,
+    "isLatest": true,
+    "isFeaturedSpecialized": true,
+    "tagLine": "Pure lexical definitions & technical jargon deciphering without ad bloat.",
+    "bestForDescription": "Unambiguous word definitions, technical acronyms, and lexical origins.",
+    "bestForBullets": [
+      "Zero display ad bloat or subscription walls",
+      "Specialized software and scientific acronym decoder",
+      "Etymological roots and formal phonetic transcriptions"
+    ],
+    "keyStrengths": [
+      "Zero affiliate bloat",
+      "Specialized jargon dictionary",
+      "Lightning fast lookup"
+    ],
+    "tags": [
+      "definitions",
+      "dictionary",
+      "defsearch",
+      "words",
+      "meaning",
+      "etymology",
+      "lexicon",
+      "vocabulary",
+      "acronyms"
+    ],
+    "searchUrlPattern": "https://def-search-5cpm.vercel.app/?q={q}",
+    "exampleQueries": [
+      "epistemic humility",
+      "heuristic algorithm",
+      "pareto distribution"
+    ]
+  },
+  {
+    "id": "wolframalpha",
+    "name": "WolframAlpha",
+    "domain": "wolframalpha.com",
+    "alias": "wolframalpha.com",
+    "url": "https://www.wolframalpha.com",
+    "category": "search-knowledge",
+    "categoryLabel": "Computational Intelligence",
+    "usedFor": "Used for computational intelligence, step-by-step calculus and algebra problem solving, chemistry molecular formulas, nutrition stats, and algorithm data queries.",
+    "popularityScore": 92,
+    "launchYear": 2009,
+    "isLatest": false,
+    "keyStrengths": [
+      "Step-by-step mathematical proofs",
+      "Curated computable knowledgebase",
+      "Exact scientific formulas"
+    ],
+    "tags": [
+      "math",
+      "calculus",
+      "physics",
+      "computational",
+      "wolfram",
+      "data",
+      "science",
+      "chemistry",
+      "nutrition"
+    ],
+    "searchUrlPattern": "https://www.wolframalpha.com/input?i={q}",
+    "exampleQueries": [
+      "integrate x^2 * sin(x) dx",
+      "compare GDP Japan vs Germany",
+      "caffeine molecular structure"
+    ]
+  },
+  {
+    "id": "archive-org",
+    "name": "Internet Archive",
+    "domain": "archive.org",
+    "alias": "archive.org / Wayback Machine",
+    "url": "https://archive.org",
+    "category": "search-knowledge",
+    "categoryLabel": "Digital Library & Wayback",
+    "usedFor": "Used for browsing historical snapshots of dead or changed web pages (Wayback Machine), accessing public domain books, retro software emulators, and historical audio recordings.",
+    "popularityScore": 95,
+    "launchYear": 1996,
+    "isLatest": false,
+    "keyStrengths": [
+      "800+ billion archived web pages",
+      "Millions of free digitized books",
+      "Browser-based software emulation"
+    ],
+    "tags": [
+      "archive",
+      "wayback machine",
+      "history",
+      "old web",
+      "books",
+      "emulators",
+      "public domain"
+    ],
+    "searchUrlPattern": "https://web.archive.org/web/*/{q}",
+    "exampleQueries": [
+      "apple.com in 1999",
+      "retro arcade games",
+      "historical radio broadcasts"
+    ]
+  },
+  {
+    "id": "merriam-webster",
+    "name": "Merriam-Webster",
+    "domain": "merriam-webster.com",
+    "alias": "merriam-webster.com",
+    "url": "https://www.merriam-webster.com",
+    "category": "search-knowledge",
+    "categoryLabel": "Dictionary & Thesaurus",
+    "usedFor": "Used for authoritative English dictionary definitions, word origins, pronunciation audio clips, thesaurus synonyms, and Word of the Day educational vocabulary.",
+    "popularityScore": 93,
+    "launchYear": 1996,
+    "isLatest": false,
+    "keyStrengths": [
+      "America most trusted dictionary",
+      "Comprehensive audio pronunciations",
+      "Nuanced synonym discrimination"
+    ],
+    "tags": [
+      "dictionary",
+      "thesaurus",
+      "vocabulary",
+      "synonyms",
+      "english",
+      "pronunciation",
+      "words"
+    ],
+    "searchUrlPattern": "https://www.merriam-webster.com/dictionary/{q}",
+    "exampleQueries": [
+      "serendipity",
+      "eloquent",
+      "pragmatic"
+    ]
+  },
+  {
+    "id": "youtube",
+    "name": "YouTube",
+    "domain": "youtube.com",
+    "alias": "youtube.com",
+    "url": "https://www.youtube.com",
+    "category": "video-streaming",
+    "categoryLabel": "Video & Streaming",
+    "usedFor": "Used for watching and uploading video content, step-by-step tutorials, educational documentaries, music videos, podcasts, and creator livestreams.",
+    "popularityScore": 100,
+    "launchYear": 2005,
+    "isLatest": false,
+    "keyStrengths": [
+      "Billions of video guides & tutorials",
+      "Live creator streaming",
+      "Deep algorithmic recommendation"
+    ],
+    "tags": [
+      "video",
+      "youtube",
+      "streaming",
+      "watch",
+      "tutorials",
+      "vlogs",
+      "music",
+      "channels",
+      "creators",
+      "clips"
+    ],
+    "searchUrlPattern": "https://www.youtube.com/results?search_query={q}",
+    "exampleQueries": [
+      "learn react in 1 hour",
+      "lofi hip hop radio live",
+      "how to build a cedar deck"
+    ]
+  },
+  {
+    "id": "netflix",
+    "name": "Netflix",
+    "domain": "netflix.com",
+    "alias": "netflix.com",
+    "url": "https://www.netflix.com",
+    "category": "video-streaming",
+    "categoryLabel": "Movies & TV Series",
+    "usedFor": "Used for streaming movies, exclusive original television series, documentaries, anime, and comedy specials with offline mobile downloads.",
+    "popularityScore": 98,
+    "launchYear": 2007,
+    "isLatest": false,
+    "keyStrengths": [
+      "Award-winning original series",
+      "4K HDR spatial audio playback",
+      "Personalized profile recommendations"
+    ],
+    "tags": [
+      "movies",
+      "streaming",
+      "netflix",
+      "shows",
+      "series",
+      "films",
+      "cinema",
+      "television",
+      "watch"
+    ],
+    "searchUrlPattern": "https://www.netflix.com/search?q={q}",
+    "exampleQueries": [
+      "sci-fi thrillers",
+      "true crime docuseries",
+      "animated fantasy"
+    ]
+  },
+  {
+    "id": "twitch",
+    "name": "Twitch",
+    "domain": "twitch.tv",
+    "alias": "twitch.tv",
+    "url": "https://www.twitch.tv",
+    "category": "video-streaming",
+    "categoryLabel": "Live Game Streaming",
+    "usedFor": "Used for watching live esports tournaments, gaming broadcasts, speedruns, creative arts livestreams, and chatting with streamers in real time.",
+    "popularityScore": 95,
+    "launchYear": 2011,
+    "isLatest": false,
+    "keyStrengths": [
+      "Real-time viewer chat culture",
+      "Esports tournament broadcasting",
+      "Creator subscription integration"
+    ],
+    "tags": [
+      "streaming",
+      "twitch",
+      "gaming",
+      "esports",
+      "live",
+      "broadcast",
+      "chat",
+      "streamer"
+    ],
+    "searchUrlPattern": "https://www.twitch.tv/search?term={q}",
+    "exampleQueries": [
+      "Valorant Champions Tour live",
+      "Speedrun Elden Ring",
+      "Just Chatting"
+    ]
+  },
+  {
+    "id": "tiktok",
+    "name": "TikTok",
+    "domain": "tiktok.com",
+    "alias": "tiktok.com",
+    "url": "https://www.tiktok.com",
+    "category": "video-streaming",
+    "categoryLabel": "Short-Form Video",
+    "usedFor": "Used for watching and creating short-form vertical video clips, discovering viral trends, humor skits, recipes, dance choreographies, and cultural challenges.",
+    "popularityScore": 99,
+    "launchYear": 2016,
+    "isLatest": true,
+    "keyStrengths": [
+      "Ultra-responsive For You page algorithm",
+      "In-app video sound remixing",
+      "Viral cultural trendsetter"
+    ],
+    "tags": [
+      "tiktok",
+      "short video",
+      "vertical video",
+      "viral",
+      "reels",
+      "clips",
+      "entertainment",
+      "trends"
+    ],
+    "searchUrlPattern": "https://www.tiktok.com/search?q={q}",
+    "exampleQueries": [
+      "quick dinner recipes",
+      "life hacks 2026",
+      "travel cinematography"
+    ]
+  },
+  {
+    "id": "spotify",
+    "name": "Spotify",
+    "domain": "spotify.com",
+    "alias": "spotify.com",
+    "url": "https://www.spotify.com",
+    "category": "music-audio",
+    "categoryLabel": "Music & Podcasts",
+    "usedFor": "Used for streaming over 100 million licensed songs, curated editorial mood playlists, personalized Discover Weekly algorithms, and leading video podcasts.",
+    "popularityScore": 99,
+    "launchYear": 2008,
+    "isLatest": false,
+    "keyStrengths": [
+      "Discover Weekly AI recommendations",
+      "Seamless multi-device Spotify Connect",
+      "100M+ track catalog & podcasts"
+    ],
+    "tags": [
+      "music",
+      "spotify",
+      "songs",
+      "streaming",
+      "audio",
+      "podcasts",
+      "playlists",
+      "albums",
+      "artists",
+      "tracks"
+    ],
+    "searchUrlPattern": "https://open.spotify.com/search/{q}",
+    "exampleQueries": [
+      "deep focus electronic",
+      "indie road trip",
+      "The Joe Rogan Experience"
+    ]
+  },
+  {
+    "id": "soundcloud",
+    "name": "SoundCloud",
+    "domain": "soundcloud.com",
+    "alias": "soundcloud.com",
+    "url": "https://soundcloud.com",
+    "category": "music-audio",
+    "categoryLabel": "Indie Music & DJ Sets",
+    "usedFor": "Used for discovering underground electronic music, DJ mixtapes, unreleased hip-hop demos, bedroom producer tracks, and timestamped audio commenting.",
+    "popularityScore": 93,
+    "launchYear": 2007,
+    "isLatest": false,
+    "keyStrengths": [
+      "Direct indie artist music uploads",
+      "Timestamped waveform comments",
+      "Home of underground remix culture"
+    ],
+    "tags": [
+      "music",
+      "soundcloud",
+      "indie",
+      "dj",
+      "remix",
+      "electronic",
+      "beats",
+      "audio",
+      "underground"
+    ],
+    "searchUrlPattern": "https://soundcloud.com/search?q={q}",
+    "exampleQueries": [
+      "lofi beat tape",
+      "live techno set Berlin",
+      "future bass instrumental"
+    ]
+  },
+  {
+    "id": "bandcamp",
+    "name": "Bandcamp",
+    "domain": "bandcamp.com",
+    "alias": "bandcamp.com",
+    "url": "https://bandcamp.com",
+    "category": "music-audio",
+    "categoryLabel": "Direct Artist Support",
+    "usedFor": "Used for directly purchasing digital albums, vinyl records, cassettes, and apparel from independent musicians who keep 80-85% of each sale.",
+    "popularityScore": 89,
+    "launchYear": 2008,
+    "isLatest": false,
+    "keyStrengths": [
+      "Fair artist revenue sharing",
+      "Lossless FLAC/ALAC downloads",
+      "Physical vinyl & cassette marketplace"
+    ],
+    "tags": [
+      "music",
+      "bandcamp",
+      "indie",
+      "vinyl",
+      "albums",
+      "lossless",
+      "merch",
+      "direct support"
+    ],
+    "searchUrlPattern": "https://bandcamp.com/search?q={q}",
+    "exampleQueries": [
+      "synthwave vinyl",
+      "post-rock instrumentals",
+      "japanese ambient jazz"
+    ]
+  },
+  {
+    "id": "reddit",
+    "name": "Reddit",
+    "domain": "reddit.com",
+    "alias": "reddit.com",
+    "url": "https://www.reddit.com",
+    "category": "social-community",
+    "categoryLabel": "Community Forums & Discussions",
+    "usedFor": "Used for crowdsourced discussions, niche hobbyist subreddits, honest user reviews on products, developer AMAs, breaking news sentiment, and finding authentic human recommendations.",
+    "popularityScore": 99,
+    "launchYear": 2005,
+    "isLatest": false,
+    "keyStrengths": [
+      "Hundreds of thousands of niche subreddits",
+      "Honest peer-vetted product feedback",
+      "Upvote/downvote meritocracy"
+    ],
+    "tags": [
+      "social",
+      "reddit",
+      "forum",
+      "community",
+      "discussions",
+      "reviews",
+      "subreddits",
+      "questions",
+      "opinions",
+      "advice"
+    ],
+    "searchUrlPattern": "https://www.reddit.com/search/?q={q}",
+    "exampleQueries": [
+      "best noise cancelling headphones reddit",
+      "home espresso machine guide",
+      "r/webdev architecture advice"
+    ]
+  },
+  {
+    "id": "x-twitter",
+    "name": "X (Twitter)",
+    "domain": "x.com",
+    "alias": "x.com (Twitter)",
+    "url": "https://x.com",
+    "category": "social-community",
+    "categoryLabel": "Real-Time News & Microblogging",
+    "usedFor": "Used for real-time breaking news updates, short-form microblogging, tech release announcements, financial sentiment tracking, and public discourse.",
+    "popularityScore": 98,
+    "launchYear": 2006,
+    "isLatest": false,
+    "keyStrengths": [
+      "Fastest breaking news distribution",
+      "Direct dialogue with tech founders & thinkers",
+      "Global viral trending topics"
+    ],
+    "tags": [
+      "social",
+      "twitter",
+      "x",
+      "microblog",
+      "news",
+      "trends",
+      "threads",
+      "posts",
+      "breaking news"
+    ],
+    "searchUrlPattern": "https://x.com/search?q={q}",
+    "exampleQueries": [
+      "#AI developments",
+      "open source release",
+      "tech earnings today"
+    ]
+  },
+  {
+    "id": "linkedin",
+    "name": "LinkedIn",
+    "domain": "linkedin.com",
+    "alias": "linkedin.com",
+    "url": "https://www.linkedin.com",
+    "category": "social-community",
+    "categoryLabel": "Professional Career Network",
+    "usedFor": "Used for corporate professional networking, career job searching, recruitment headhunting, business-to-business partnerships, and professional resume showcases.",
+    "popularityScore": 97,
+    "launchYear": 2003,
+    "isLatest": false,
+    "keyStrengths": [
+      "Global standard for professional resumes",
+      "Targeted enterprise recruiter network",
+      "Industry thought leadership"
+    ],
+    "tags": [
+      "jobs",
+      "careers",
+      "linkedin",
+      "networking",
+      "hiring",
+      "resumes",
+      "b2b",
+      "corporate",
+      "professional"
+    ],
+    "searchUrlPattern": "https://www.linkedin.com/search/results/all/?keywords={q}",
+    "exampleQueries": [
+      "Senior React Engineer jobs",
+      "Tech Recruiter San Francisco",
+      "AI product manager hiring"
+    ]
+  },
+  {
+    "id": "discord",
+    "name": "Discord",
+    "domain": "discord.com",
+    "alias": "discord.com",
+    "url": "https://discord.com",
+    "category": "social-community",
+    "categoryLabel": "Voice & Community Chat",
+    "usedFor": "Used for private voice channels, text server channels, developer support hubs, gaming clan chats, and screen-sharing hangout lounges.",
+    "popularityScore": 96,
+    "launchYear": 2015,
+    "isLatest": false,
+    "keyStrengths": [
+      "Low-latency crystal clear voice rooms",
+      "Custom server roles and moderation bots",
+      "Rich developer API integrations"
+    ],
+    "tags": [
+      "chat",
+      "discord",
+      "voice",
+      "communities",
+      "servers",
+      "gaming",
+      "screen share",
+      "hangout"
+    ],
+    "searchUrlPattern": "https://discord.com",
+    "exampleQueries": [
+      "gaming servers",
+      "coding community discord",
+      "ai research chat"
+    ]
+  },
+  {
+    "id": "bluesky",
+    "name": "Bluesky",
+    "domain": "bsky.app",
+    "alias": "bsky.app",
+    "url": "https://bsky.app",
+    "category": "social-community",
+    "categoryLabel": "Decentralized Social",
+    "usedFor": "Used for open decentralized microblogging built on the AT Protocol, featuring user-chosen custom feed algorithms and portable social identities.",
+    "popularityScore": 88,
+    "launchYear": 2023,
+    "isLatest": true,
+    "keyStrengths": [
+      "Decentralized open AT Protocol",
+      "Custom user-curated algorithmic feeds",
+      "No algorithmic ads or forced ranking"
+    ],
+    "tags": [
+      "social",
+      "bluesky",
+      "microblog",
+      "decentralized",
+      "atproto",
+      "open web",
+      "threads"
+    ],
+    "searchUrlPattern": "https://bsky.app/search?q={q}",
+    "exampleQueries": [
+      "tech founders",
+      "astronomy photography",
+      "journalism feeds"
+    ]
+  },
+  {
+    "id": "pinterest",
+    "name": "Pinterest",
+    "domain": "pinterest.com",
+    "alias": "pinterest.com",
+    "url": "https://www.pinterest.com",
+    "category": "social-community",
+    "categoryLabel": "Visual Mood Boards & Ideas",
+    "usedFor": "Used for visual bookmarking, assembling mood boards, home interior decor ideas, fashion outfit inspiration, and creative DIY project planning.",
+    "popularityScore": 95,
+    "launchYear": 2010,
+    "isLatest": false,
+    "keyStrengths": [
+      "Visual search discovery engine",
+      "Organized pinboards & moodboards",
+      "Top idea platform for lifestyle & decor"
+    ],
+    "tags": [
+      "pinterest",
+      "moodboards",
+      "interior design",
+      "fashion",
+      "recipes",
+      "inspiration",
+      "decor",
+      "crafts"
+    ],
+    "searchUrlPattern": "https://www.pinterest.com/search/pins/?q={q}",
+    "exampleQueries": [
+      "minimalist kitchen remodel",
+      "autumn capsule wardrobe",
+      "creative pottery ideas"
+    ]
+  },
+  {
+    "id": "amazon",
+    "name": "Amazon",
+    "domain": "amazon.com",
+    "alias": "amazon.com",
+    "url": "https://www.amazon.com",
+    "category": "shopping",
+    "categoryLabel": "Global Retail & Marketplace",
+    "usedFor": "Used for purchasing physical goods, same-day and next-day package deliveries with Amazon Prime, verified buyer reviews, electronics, books, and household staples.",
+    "popularityScore": 100,
+    "launchYear": 1994,
+    "isLatest": false,
+    "keyStrengths": [
+      "Massive product selection",
+      "Prime 1-day/2-day fast shipping",
+      "Verified buyer star ratings & photos"
+    ],
+    "tags": [
+      "shopping",
+      "amazon",
+      "ecommerce",
+      "store",
+      "buy",
+      "products",
+      "delivery",
+      "prime",
+      "retail",
+      "orders"
+    ],
+    "searchUrlPattern": "https://www.amazon.com/s?k={q}",
+    "exampleQueries": [
+      "wireless ergonomic keyboard",
+      "cast iron skillet 12 inch",
+      "usb c 100w fast charger"
+    ]
+  },
+  {
+    "id": "ebay",
+    "name": "eBay",
+    "domain": "ebay.com",
+    "alias": "ebay.com",
+    "url": "https://www.ebay.com",
+    "category": "shopping",
+    "categoryLabel": "Auctions & Secondhand Marketplace",
+    "usedFor": "Used for auction-style bidding and instant buying of secondhand electronics, rare collectibles, vintage apparel, discontinued car parts, and certified refurbished goods.",
+    "popularityScore": 96,
+    "launchYear": 1995,
+    "isLatest": false,
+    "keyStrengths": [
+      "Auction bidding and rare collectibles",
+      "Certified refurbished hardware deals",
+      "Global buyer protection guarantee"
+    ],
+    "tags": [
+      "shopping",
+      "ebay",
+      "auctions",
+      "secondhand",
+      "used",
+      "vintage",
+      "collectibles",
+      "bidding",
+      "marketplace"
+    ],
+    "searchUrlPattern": "https://www.ebay.com/sch/i.html?_nkw={q}",
+    "exampleQueries": [
+      "vintage mechanical watch",
+      "pokemon 1st edition card",
+      "refurbished thinkpad laptop"
+    ]
+  },
+  {
+    "id": "etsy",
+    "name": "Etsy",
+    "domain": "etsy.com",
+    "alias": "etsy.com",
+    "url": "https://www.etsy.com",
+    "category": "shopping",
+    "categoryLabel": "Handmade Crafts & Vintage Goods",
+    "usedFor": "Used for buying custom handmade crafts, bespoke personalized jewelry, artisanal pottery, custom digital planners, and vintage home goods directly from independent makers.",
+    "popularityScore": 94,
+    "launchYear": 2005,
+    "isLatest": false,
+    "keyStrengths": [
+      "Custom handmade & personalized gifts",
+      "Direct support for independent artisans",
+      "Unique non-mass-manufactured items"
+    ],
+    "tags": [
+      "shopping",
+      "etsy",
+      "handmade",
+      "crafts",
+      "custom gifts",
+      "artisanal",
+      "jewelry",
+      "makers"
+    ],
+    "searchUrlPattern": "https://www.etsy.com/search?q={q}",
+    "exampleQueries": [
+      "custom leather wallet monogrammed",
+      "handmade ceramic coffee mug",
+      "linen dining table runner"
+    ]
+  },
+  {
+    "id": "shopify",
+    "name": "Shopify",
+    "domain": "shopify.com",
+    "alias": "shopify.com",
+    "url": "https://www.shopify.com",
+    "category": "shopping",
+    "categoryLabel": "E-Commerce Platform for Brands",
+    "usedFor": "Used by entrepreneurs and retail brands to build independent direct-to-consumer online stores, manage product inventories, process payments with Shop Pay, and fulfill orders.",
+    "popularityScore": 95,
+    "launchYear": 2006,
+    "isLatest": false,
+    "keyStrengths": [
+      "Powers millions of independent stores",
+      "Shop Pay frictionless 1-click checkout",
+      "Complete inventory & marketing suite"
+    ],
+    "tags": [
+      "ecommerce",
+      "shopify",
+      "stores",
+      "online shop",
+      "retail",
+      "selling",
+      "merchant",
+      "checkout"
+    ],
+    "searchUrlPattern": "https://www.shopify.com",
+    "exampleQueries": [
+      "start online store",
+      "ecommerce inventory management",
+      "shop pay integration"
+    ]
+  },
+  {
+    "id": "chatgpt",
+    "name": "ChatGPT",
+    "domain": "chatgpt.com",
+    "alias": "chatgpt.com / OpenAI",
+    "url": "https://chatgpt.com",
+    "category": "ai",
+    "categoryLabel": "Conversational Generative AI",
+    "usedFor": "Used for conversational AI assistance, drafting essays, coding software solutions, complex mathematical reasoning, custom GPT automation, and multimodal image analysis.",
+    "popularityScore": 100,
+    "launchYear": 2022,
+    "isLatest": true,
+    "keyStrengths": [
+      "Industry standard generative conversational AI",
+      "Custom GPT agent ecosystem",
+      "Advanced multimodal vision & voice"
+    ],
+    "tags": [
+      "ai",
+      "chatgpt",
+      "openai",
+      "llm",
+      "chat",
+      "assistant",
+      "gpt-4",
+      "reasoning",
+      "coding",
+      "intelligence"
+    ],
+    "searchUrlPattern": "https://chatgpt.com/?q={q}",
+    "exampleQueries": [
+      "explain quantum entanglement simply",
+      "debug this python regex",
+      "draft a contract amendment"
+    ]
+  },
+  {
+    "id": "claude",
+    "name": "Claude AI",
+    "domain": "claude.ai",
+    "alias": "claude.ai / Anthropic",
+    "url": "https://claude.ai",
+    "category": "ai",
+    "categoryLabel": "Reasoning & Coding Assistant",
+    "usedFor": "Used for high-precision coding, complex analytical writing, processing 200,000+ token context documents (entire book analysis), and interactive visual Artifacts.",
+    "popularityScore": 96,
+    "launchYear": 2023,
+    "isLatest": true,
+    "keyStrengths": [
+      "200K+ token context window",
+      "Exceptional code generation & refactoring",
+      "Interactive live Artifacts rendering"
+    ],
+    "tags": [
+      "ai",
+      "claude",
+      "anthropic",
+      "sonnet",
+      "llm",
+      "coding",
+      "writing",
+      "artifacts",
+      "large context"
+    ],
+    "searchUrlPattern": "https://claude.ai",
+    "exampleQueries": [
+      "refactor full react codebase",
+      "analyze 100-page financial PDF",
+      "write concise executive memo"
+    ]
+  },
+  {
+    "id": "perplexity",
+    "name": "Perplexity AI",
+    "domain": "perplexity.ai",
+    "alias": "perplexity.ai",
+    "url": "https://www.perplexity.ai",
+    "category": "ai",
+    "categoryLabel": "AI Answer Engine & Citations",
+    "usedFor": "Used as an AI-powered conversational search engine that synthesizes live web pages into direct structured answers with clickable footnote citations.",
+    "popularityScore": 94,
+    "launchYear": 2022,
+    "isLatest": true,
+    "keyStrengths": [
+      "Live web crawling with direct citations",
+      "Pro Search multi-step research synthesis",
+      "Academic paper citation mode"
+    ],
+    "tags": [
+      "ai",
+      "perplexity",
+      "search engine",
+      "citations",
+      "research",
+      "answers",
+      "live web"
+    ],
+    "searchUrlPattern": "https://www.perplexity.ai/search?q={q}",
+    "exampleQueries": [
+      "latest lithium sulfur battery breakthroughs 2026",
+      "comparative analysis electric heat pumps vs gas",
+      "history of semiconductors"
+    ]
+  },
+  {
+    "id": "huggingface",
+    "name": "Hugging Face",
+    "domain": "huggingface.co",
+    "alias": "huggingface.co",
+    "url": "https://huggingface.co",
+    "category": "ai",
+    "categoryLabel": "Open-Source AI & Model Hub",
+    "usedFor": "Used for downloading, fine-tuning, and sharing open-source machine learning models (Llama, Stable Diffusion), datasets, and hosting interactive web demos (Spaces).",
+    "popularityScore": 94,
+    "launchYear": 2016,
+    "isLatest": false,
+    "keyStrengths": [
+      "Hub for 500k+ open-source AI models",
+      "Gradio & Streamlit Spaces demos",
+      "Transformers library standard"
+    ],
+    "tags": [
+      "ai",
+      "machine learning",
+      "huggingface",
+      "models",
+      "weights",
+      "open source",
+      "transformers",
+      "spaces"
+    ],
+    "searchUrlPattern": "https://huggingface.co/models?search={q}",
+    "exampleQueries": [
+      "llama 3.3 70b gguf",
+      "stable diffusion checkpoints",
+      "whisper audio transcription"
+    ]
+  },
+  {
+    "id": "midjourney",
+    "name": "Midjourney",
+    "domain": "midjourney.com",
+    "alias": "midjourney.com",
+    "url": "https://www.midjourney.com",
+    "category": "ai",
+    "categoryLabel": "AI Generative Visual Art",
+    "usedFor": "Used for photorealistic image generation, concept art design, cinematic lighting synthesis, architectural rendering, and graphic illustration from natural language prompts.",
+    "popularityScore": 93,
+    "launchYear": 2022,
+    "isLatest": true,
+    "keyStrengths": [
+      "Unrivaled photorealism & texture fidelity",
+      "Cinematic lighting & stylistic controls",
+      "Inpainting & image pan/zoom"
+    ],
+    "tags": [
+      "ai",
+      "midjourney",
+      "image generation",
+      "art",
+      "graphics",
+      "prompt",
+      "concept art",
+      "photorealism"
+    ],
+    "searchUrlPattern": "https://www.midjourney.com/explore?q={q}",
+    "exampleQueries": [
+      "cinematic sci-fi cityscape 8k",
+      "isometric miniature cyberpunk bar",
+      "hyperrealistic portrait studio lighting"
+    ]
+  },
+  {
+    "id": "cursor",
+    "name": "Cursor",
+    "domain": "cursor.com",
+    "alias": "cursor.com",
+    "url": "https://www.cursor.com",
+    "category": "ai",
+    "categoryLabel": "AI Code Editor & Agent",
+    "usedFor": "Used for full-codebase AI software development, codebase indexing, multi-file code editing, terminal command synthesis, and instant bug fixes.",
+    "popularityScore": 92,
+    "launchYear": 2023,
+    "isLatest": true,
+    "keyStrengths": [
+      "Deep repository-wide symbol indexing",
+      "Multi-file code refactoring & composer",
+      "VS Code ecosystem compatibility"
+    ],
+    "tags": [
+      "coding",
+      "ai",
+      "cursor",
+      "editor",
+      "ide",
+      "code",
+      "copilot",
+      "software engineering"
+    ],
+    "searchUrlPattern": "https://www.cursor.com",
+    "exampleQueries": [
+      "install cursor ide",
+      "codebase indexing best practices",
+      "composer multi file edit"
+    ]
+  },
+  {
+    "id": "github",
+    "name": "GitHub",
+    "domain": "github.com",
+    "alias": "github.com",
+    "url": "https://github.com",
+    "category": "coding",
+    "categoryLabel": "Git Code Repository & CI/CD",
+    "usedFor": "Used for Git version control repository hosting, open-source software collaboration, pull request reviews, issue tracking, and automated CI/CD via GitHub Actions.",
+    "popularityScore": 99,
+    "launchYear": 2008,
+    "isLatest": false,
+    "keyStrengths": [
+      "World largest code host with 100M+ developers",
+      "GitHub Actions CI/CD automation",
+      "Global open-source community"
+    ],
+    "tags": [
+      "coding",
+      "git",
+      "developer",
+      "repository",
+      "code",
+      "programming",
+      "open source",
+      "actions",
+      "devops"
+    ],
+    "searchUrlPattern": "https://github.com/search?q={q}",
+    "exampleQueries": [
+      "stars:>50000 language:typescript",
+      "filename:docker-compose.yml postgres",
+      "path:package.json react 19"
+    ]
+  },
+  {
+    "id": "stackoverflow",
+    "name": "Stack Overflow",
+    "domain": "stackoverflow.com",
+    "alias": "stackoverflow.com",
+    "url": "https://stackoverflow.com",
+    "category": "coding",
+    "categoryLabel": "Developer Questions & Answers",
+    "usedFor": "Used for asking and researching technical software engineering questions, resolving compiler error codes, finding verified syntax examples, and debugging algorithms.",
+    "popularityScore": 97,
+    "launchYear": 2008,
+    "isLatest": false,
+    "keyStrengths": [
+      "Millions of vetted programmer solutions",
+      "Upvoted peer-reviewed code snippets",
+      "Covers every major programming language"
+    ],
+    "tags": [
+      "coding",
+      "programming",
+      "developer",
+      "questions",
+      "answers",
+      "debug",
+      "errors",
+      "syntax",
+      "troubleshoot"
+    ],
+    "searchUrlPattern": "https://stackoverflow.com/search?q={q}",
+    "exampleQueries": [
+      "how to iterate over dictionary in python",
+      "fatal error: concurrent map writes",
+      "useeffect vs uselayouteffect"
+    ]
+  },
+  {
+    "id": "vercel",
+    "name": "Vercel",
+    "domain": "vercel.com",
+    "alias": "vercel.com",
+    "url": "https://vercel.com",
+    "category": "coding",
+    "categoryLabel": "Frontend Cloud & Next.js Hosting",
+    "usedFor": "Used for zero-configuration frontend cloud deployments, Next.js framework hosting, serverless edge computing, and automatic preview URLs on every Git pull request.",
+    "popularityScore": 94,
+    "launchYear": 2020,
+    "isLatest": true,
+    "keyStrengths": [
+      "Instant Git push deployments",
+      "Official creators of Next.js",
+      "Global edge network with serverless functions"
+    ],
+    "tags": [
+      "coding",
+      "vercel",
+      "hosting",
+      "deployment",
+      "nextjs",
+      "react",
+      "frontend",
+      "serverless",
+      "cloud"
+    ],
+    "searchUrlPattern": "https://vercel.com",
+    "exampleQueries": [
+      "deploy nextjs app",
+      "edge middleware caching",
+      "serverless function limits"
+    ]
+  },
+  {
+    "id": "supabase",
+    "name": "Supabase",
+    "domain": "supabase.com",
+    "alias": "supabase.com",
+    "url": "https://supabase.com",
+    "category": "coding",
+    "categoryLabel": "PostgreSQL Backend-as-a-Service",
+    "usedFor": "Used as an open-source Firebase alternative providing managed PostgreSQL databases, real-time WebSocket subscriptions, user authentication, and storage buckets.",
+    "popularityScore": 92,
+    "launchYear": 2020,
+    "isLatest": true,
+    "keyStrengths": [
+      "Real dedicated PostgreSQL database",
+      "Instant auto-generated REST & GraphQL APIs",
+      "Row Level Security (RLS) policies"
+    ],
+    "tags": [
+      "coding",
+      "supabase",
+      "database",
+      "postgres",
+      "sql",
+      "backend",
+      "auth",
+      "realtime",
+      "storage"
+    ],
+    "searchUrlPattern": "https://supabase.com",
+    "exampleQueries": [
+      "supabase row level security rules",
+      "postgres pgvector semantic search",
+      "realtime websocket listeners"
+    ]
+  },
+  {
+    "id": "replit",
+    "name": "Replit",
+    "domain": "replit.com",
+    "alias": "replit.com",
+    "url": "https://replit.com",
+    "category": "coding",
+    "categoryLabel": "In-Browser Cloud IDE",
+    "usedFor": "Used for instant cloud IDE coding inside the web browser across 50+ programming languages without installing local compilers, plus rapid multiplayer collaboration.",
+    "popularityScore": 91,
+    "launchYear": 2016,
+    "isLatest": false,
+    "keyStrengths": [
+      "Zero local installation required",
+      "Real-time Google Docs style multiplayer code",
+      "Instant web app hosting"
+    ],
+    "tags": [
+      "coding",
+      "replit",
+      "ide",
+      "python",
+      "cloud editor",
+      "beginner",
+      "learn to code",
+      "in browser"
+    ],
+    "searchUrlPattern": "https://replit.com",
+    "exampleQueries": [
+      "run python script online",
+      "collaborative coding sandbox",
+      "replit agent full stack"
+    ]
+  },
+  {
+    "id": "leetcode",
+    "name": "LeetCode",
+    "domain": "leetcode.com",
+    "alias": "leetcode.com",
+    "url": "https://leetcode.com",
+    "category": "coding",
+    "categoryLabel": "Algorithms & Coding Interview Prep",
+    "usedFor": "Used for practicing computer science data structures, dynamic programming algorithms, SQL queries, and preparing for big-tech software engineering technical interviews.",
+    "popularityScore": 93,
+    "launchYear": 2015,
+    "isLatest": false,
+    "keyStrengths": [
+      "Over 3,000 curated algorithm problems",
+      "Automated test suite & execution time benchmarks",
+      "Global weekly programming contests"
+    ],
+    "tags": [
+      "coding",
+      "leetcode",
+      "algorithms",
+      "interviews",
+      "data structures",
+      "faang",
+      "python",
+      "java",
+      "c++"
+    ],
+    "searchUrlPattern": "https://leetcode.com/problemset/all/?search={q}",
+    "exampleQueries": [
+      "two sum",
+      "lru cache implementation",
+      "trapping rain water dynamic programming"
+    ]
+  },
+  {
+    "id": "npmjs",
+    "name": "npm Registry",
+    "domain": "npmjs.com",
+    "alias": "npmjs.com",
+    "url": "https://www.npmjs.com",
+    "category": "coding",
+    "categoryLabel": "JavaScript Package Registry",
+    "usedFor": "Used for publishing, searching, and installing open-source JavaScript and TypeScript packages, viewing package download statistics, dependencies, and README docs.",
+    "popularityScore": 96,
+    "launchYear": 2010,
+    "isLatest": false,
+    "keyStrengths": [
+      "World largest software package registry",
+      "Weekly download velocity analytics",
+      "Security vulnerability audit flags"
+    ],
+    "tags": [
+      "coding",
+      "npm",
+      "packages",
+      "javascript",
+      "typescript",
+      "libraries",
+      "modules",
+      "node"
+    ],
+    "searchUrlPattern": "https://www.npmjs.com/search?q={q}",
+    "exampleQueries": [
+      "zod validation",
+      "lucide-react icons",
+      "express rate limit"
+    ]
+  },
+  {
+    "id": "notion",
+    "name": "Notion",
+    "domain": "notion.so",
+    "alias": "notion.so",
+    "url": "https://www.notion.so",
+    "category": "productivity",
+    "categoryLabel": "Connected Workspace & Wiki",
+    "usedFor": "Used for building customizable team wikis, project management boards (Kanban), meeting notes, interconnected relational databases, and personal daily habit dashboards.",
+    "popularityScore": 97,
+    "launchYear": 2016,
+    "isLatest": false,
+    "keyStrengths": [
+      "Block-based modular document architecture",
+      "Relational database views (table, board, calendar)",
+      "Deep workspace team wiki sharing"
+    ],
+    "tags": [
+      "productivity",
+      "notion",
+      "notes",
+      "wiki",
+      "workspace",
+      "kanban",
+      "tasks",
+      "database",
+      "project management"
+    ],
+    "searchUrlPattern": "https://www.notion.so",
+    "exampleQueries": [
+      "product roadmap template",
+      "company engineering wiki",
+      "weekly habit tracker"
+    ]
+  },
+  {
+    "id": "google-docs",
+    "name": "Google Docs & Drive",
+    "domain": "drive.google.com",
+    "alias": "Google Docs / Drive",
+    "url": "https://drive.google.com",
+    "category": "productivity",
+    "categoryLabel": "Cloud Docs & Spreadsheets",
+    "usedFor": "Used for real-time collaborative document writing, spreadsheet modeling (Google Sheets), slide decks (Google Slides), and secure cloud file storage with version history.",
+    "popularityScore": 100,
+    "launchYear": 2006,
+    "isLatest": false,
+    "keyStrengths": [
+      "Gold standard real-time multi-cursor collaboration",
+      "Continuous autosave to cloud",
+      "Native Google Workspace integration"
+    ],
+    "tags": [
+      "productivity",
+      "google docs",
+      "google drive",
+      "spreadsheets",
+      "sheets",
+      "word processor",
+      "slides",
+      "cloud storage"
+    ],
+    "searchUrlPattern": "https://drive.google.com",
+    "exampleQueries": [
+      "collaborative team agenda",
+      "financial forecast spreadsheet",
+      "presentation slides"
+    ]
+  },
+  {
+    "id": "slack",
+    "name": "Slack",
+    "domain": "slack.com",
+    "alias": "slack.com",
+    "url": "https://slack.com",
+    "category": "productivity",
+    "categoryLabel": "Enterprise Team Messaging",
+    "usedFor": "Used for workplace team communication organized into dedicated topic channels, direct messaging, spontaneous audio huddles, and bot workflow automations.",
+    "popularityScore": 96,
+    "launchYear": 2013,
+    "isLatest": false,
+    "keyStrengths": [
+      "Organized public & private channel structure",
+      "Thousands of SaaS bot integrations",
+      "Instant voice/video huddle calling"
+    ],
+    "tags": [
+      "productivity",
+      "slack",
+      "team chat",
+      "messaging",
+      "workplace",
+      "collaboration",
+      "channels",
+      "huddles"
+    ],
+    "searchUrlPattern": "https://slack.com",
+    "exampleQueries": [
+      "team announcements channel",
+      "slack workflow automation",
+      "jira slack integration"
+    ]
+  },
+  {
+    "id": "linear",
+    "name": "Linear",
+    "domain": "linear.app",
+    "alias": "linear.app",
+    "url": "https://linear.app",
+    "category": "productivity",
+    "categoryLabel": "High-Speed Issue Tracking",
+    "usedFor": "Used by modern product teams for high-speed software issue tracking, sprint cycles, product roadmaps, and bug management built around keyboard shortcuts.",
+    "popularityScore": 91,
+    "launchYear": 2019,
+    "isLatest": false,
+    "keyStrengths": [
+      "Sub-100ms keyboard-first interaction",
+      "Clean minimalist software development cycles",
+      "Seamless GitHub PR linking"
+    ],
+    "tags": [
+      "productivity",
+      "linear",
+      "issues",
+      "bugs",
+      "sprints",
+      "agile",
+      "project management",
+      "software"
+    ],
+    "searchUrlPattern": "https://linear.app",
+    "exampleQueries": [
+      "sprint planning workflow",
+      "git branch auto close issues",
+      "linear project roadmap"
+    ]
+  },
+  {
+    "id": "obsidian",
+    "name": "Obsidian",
+    "domain": "obsidian.md",
+    "alias": "obsidian.md",
+    "url": "https://obsidian.md",
+    "category": "productivity",
+    "categoryLabel": "Personal Knowledge Graph",
+    "usedFor": "Used for private, offline-first personal knowledge management using plain text Markdown files with bidirectional [[wiki]] linking and interactive visual graph maps.",
+    "popularityScore": 90,
+    "launchYear": 2020,
+    "isLatest": true,
+    "keyStrengths": [
+      "100% local plain text Markdown storage",
+      "Bidirectional note linking & interactive graph visualizer",
+      "Vibrant community plugin ecosystem"
+    ],
+    "tags": [
+      "productivity",
+      "obsidian",
+      "notes",
+      "second brain",
+      "markdown",
+      "knowledge base",
+      "graph",
+      "offline"
+    ],
+    "searchUrlPattern": "https://obsidian.md",
+    "exampleQueries": [
+      "zettelkasten note taking",
+      "obsidian graph view analysis",
+      "dataview query syntax"
+    ]
+  },
+  {
+    "id": "figma",
+    "name": "Figma",
+    "domain": "figma.com",
+    "alias": "figma.com",
+    "url": "https://www.figma.com",
+    "category": "design",
+    "categoryLabel": "Collaborative UI/UX Design",
+    "usedFor": "Used for collaborative digital interface design, vector UI screen layouts, interactive clickable prototypes, design system component libraries, and developer handoff.",
+    "popularityScore": 97,
+    "launchYear": 2016,
+    "isLatest": false,
+    "keyStrengths": [
+      "Multiplayer real-time vector canvas",
+      "Auto Layout flexbox-style responsive design",
+      "Dev Mode inspect for CSS and tokens"
+    ],
+    "tags": [
+      "design",
+      "figma",
+      "ui",
+      "ux",
+      "prototypes",
+      "wireframes",
+      "vector",
+      "mockups",
+      "interface"
+    ],
+    "searchUrlPattern": "https://www.figma.com/community/search?model_type=hub_files&q={q}",
+    "exampleQueries": [
+      "mobile app design system",
+      "dashboard wireframe kit",
+      "minimalist landing page ui"
+    ]
+  },
+  {
+    "id": "canva",
+    "name": "Canva",
+    "domain": "canva.com",
+    "alias": "canva.com",
+    "url": "https://www.canva.com",
+    "category": "design",
+    "categoryLabel": "Graphic Design for Everyone",
+    "usedFor": "Used for intuitive drag-and-drop graphic design, social media flyers, pitch decks, YouTube thumbnails, resumes, and marketing banners with millions of templates.",
+    "popularityScore": 98,
+    "launchYear": 2013,
+    "isLatest": false,
+    "keyStrengths": [
+      "Zero design skills required drag-and-drop",
+      "Hundreds of thousands of pre-made templates",
+      "One-click background removal and magic resize"
+    ],
+    "tags": [
+      "design",
+      "canva",
+      "graphics",
+      "flyers",
+      "posters",
+      "social media",
+      "presentations",
+      "templates",
+      "thumbnails"
+    ],
+    "searchUrlPattern": "https://www.canva.com/search/templates?q={q}",
+    "exampleQueries": [
+      "instagram story template",
+      "pitch deck presentation modern",
+      "restaurant menu design"
+    ]
+  },
+  {
+    "id": "unsplash",
+    "name": "Unsplash",
+    "domain": "unsplash.com",
+    "alias": "unsplash.com",
+    "url": "https://unsplash.com",
+    "category": "design",
+    "categoryLabel": "Royalty-Free High-Res Photos",
+    "usedFor": "Used for downloading high-resolution, commercially-usable stock photography contributed by global photographers without licensing fees or watermarks.",
+    "popularityScore": 93,
+    "launchYear": 2013,
+    "isLatest": false,
+    "keyStrengths": [
+      "Generous commercial use license",
+      "High artistic photography quality",
+      "No tacky corporate stock clichés"
+    ],
+    "tags": [
+      "design",
+      "photos",
+      "unsplash",
+      "stock",
+      "images",
+      "high resolution",
+      "wallpaper",
+      "royalty free"
+    ],
+    "searchUrlPattern": "https://unsplash.com/s/photos/{q}",
+    "exampleQueries": [
+      "scandinavian interior architecture",
+      "misty mountain landscape morning",
+      "modern tech workspace desk"
+    ]
+  },
+  {
+    "id": "dribbble",
+    "name": "Dribbble",
+    "domain": "dribbble.com",
+    "alias": "dribbble.com",
+    "url": "https://dribbble.com",
+    "category": "design",
+    "categoryLabel": "Designer Portfolios & Inspiration",
+    "usedFor": "Used by digital product designers, illustrators, and branding animators to showcase creative portfolios, micro-interactions, and land freelance design clients.",
+    "popularityScore": 91,
+    "launchYear": 2009,
+    "isLatest": false,
+    "keyStrengths": [
+      "Leading community for visual design inspiration",
+      "Micro-interaction and motion previews",
+      "Recruiting top UI/UX talent"
+    ],
+    "tags": [
+      "design",
+      "dribbble",
+      "inspiration",
+      "ui",
+      "illustrations",
+      "branding",
+      "animations",
+      "portfolio"
+    ],
+    "searchUrlPattern": "https://dribbble.com/search/{q}",
+    "exampleQueries": [
+      "mobile banking app ui",
+      "fintech dashboard design",
+      "3d illustration character"
+    ]
+  },
+  {
+    "id": "steam",
+    "name": "Steam",
+    "domain": "store.steampowered.com",
+    "alias": "store.steampowered.com / Valve",
+    "url": "https://store.steampowered.com",
+    "category": "gaming",
+    "categoryLabel": "PC Game Store & Community",
+    "usedFor": "Used for buying and launching PC video games, downloading community game mods via Steam Workshop, syncing cloud game saves, and participating in seasonal game sales.",
+    "popularityScore": 98,
+    "launchYear": 2003,
+    "isLatest": false,
+    "keyStrengths": [
+      "World leading PC digital game library",
+      "Steam Workshop one-click game modding",
+      "Steam Cloud game progress synchronization"
+    ],
+    "tags": [
+      "gaming",
+      "steam",
+      "pc games",
+      "video games",
+      "valve",
+      "mods",
+      "steam deck",
+      "sales"
+    ],
+    "searchUrlPattern": "https://store.steampowered.com/search/?term={q}",
+    "exampleQueries": [
+      "roguelike deckbuilder",
+      "open world rpg coop",
+      "best strategy games"
+    ]
+  },
+  {
+    "id": "game-search",
+    "name": "Game Search",
+    "domain": "game-search.vercel.app",
+    "alias": "GS.com",
+    "url": "https://game-search.vercel.app",
+    "category": "gaming",
+    "categoryLabel": "Specialized Gaming Guides",
+    "usedFor": "Used for targeted gaming searches delivering boss fight mechanics, weapon stat comparisons, item drop rates, and wiki extraction without SEO affiliate filler.",
+    "popularityScore": 88,
+    "launchYear": 2024,
+    "isLatest": true,
+    "isFeaturedSpecialized": true,
+    "tagLine": "Dedicated gaming queries delivering boss mechanics & drop rates without SEO filler.",
+    "bestForDescription": "Boss attack patterns, item drop rates, weapon tier lists, and frame data.",
+    "bestForBullets": [
+      "Filters out 10-minute YouTube intros and ad-cluttered walkthrough sites",
+      "Direct extraction of weapon scalings, drop percentages, and boss weaknesses",
+      "Community speedrun routes and glitch documentation index"
+    ],
+    "keyStrengths": [
+      "Zero clickbait guides",
+      "Direct wiki and frame data pull",
+      "Speedrun and boss mechanics focus"
+    ],
+    "tags": [
+      "gaming",
+      "game search",
+      "gs.com",
+      "walkthroughs",
+      "bosses",
+      "builds",
+      "rpg",
+      "loot",
+      "drop rates",
+      "wikis"
+    ],
+    "searchUrlPattern": "https://game-search.vercel.app/?q={q}",
+    "exampleQueries": [
+      "Elden Ring Malenia bleed build weakness",
+      "Cyberpunk 2077 iconic weapons locations",
+      "Baldurs Gate 3 honor mode paladin"
+    ]
+  },
+  {
+    "id": "roblox",
+    "name": "Roblox",
+    "domain": "roblox.com",
+    "alias": "roblox.com",
+    "url": "https://www.roblox.com",
+    "category": "gaming",
+    "categoryLabel": "User-Created 3D Gaming Platform",
+    "usedFor": "Used by millions of players to explore immersive 3D multiplayer games created by independent developers using the Lua-powered Roblox Studio game engine.",
+    "popularityScore": 96,
+    "launchYear": 2006,
+    "isLatest": false,
+    "keyStrengths": [
+      "Millions of community-created multiplayer games",
+      "Roblox Studio visual Lua game engine",
+      "Cross-platform play on PC, mobile & consoles"
+    ],
+    "tags": [
+      "gaming",
+      "roblox",
+      "multiplayer",
+      "creator platform",
+      "lua",
+      "kids",
+      "experiences",
+      "virtual worlds"
+    ],
+    "searchUrlPattern": "https://www.roblox.com/discover/?Keyword={q}",
+    "exampleQueries": [
+      "Blox Fruits",
+      "Adopt Me",
+      "Anime Defenders"
+    ]
+  },
+  {
+    "id": "nexus-mods",
+    "name": "Nexus Mods",
+    "domain": "nexusmods.com",
+    "alias": "nexusmods.com",
+    "url": "https://www.nexusmods.com",
+    "category": "gaming",
+    "categoryLabel": "PC Game Modding Repository",
+    "usedFor": "Used for discovering and downloading user-created game modifications, graphic texture enhancements, bug fixes, and overhaul patches for PC titles like Skyrim and Fallout.",
+    "popularityScore": 91,
+    "launchYear": 2001,
+    "isLatest": false,
+    "keyStrengths": [
+      "Largest PC game modification archive",
+      "Vortex mod manager automated installation",
+      "Vibrant community of game modders"
+    ],
+    "tags": [
+      "gaming",
+      "mods",
+      "nexus mods",
+      "skyrim",
+      "witcher",
+      "textures",
+      "pc gaming",
+      "patches"
+    ],
+    "searchUrlPattern": "https://www.nexusmods.com/search/?gsearch={q}",
+    "exampleQueries": [
+      "Skyrim Special Edition graphic mods",
+      "Cyberpunk 2077 vehicle handling mod",
+      "Witcher 3 hd reworked"
+    ]
+  },
+  {
+    "id": "tradingview",
+    "name": "TradingView",
+    "domain": "tradingview.com",
+    "alias": "tradingview.com",
+    "url": "https://www.tradingview.com",
+    "category": "finance",
+    "categoryLabel": "Financial Charting & Technical Analysis",
+    "usedFor": "Used for real-time financial market charting, technical indicator analysis (RSI, MACD), custom Pine Script trading strategies, and multi-asset stock screeners.",
+    "popularityScore": 95,
+    "launchYear": 2011,
+    "isLatest": false,
+    "keyStrengths": [
+      "Interactive candlestick charting suite",
+      "Custom Pine Script trading algorithm builder",
+      "Global multi-asset coverage (stocks, forex, crypto)"
+    ],
+    "tags": [
+      "finance",
+      "stocks",
+      "trading",
+      "tradingview",
+      "charts",
+      "technical analysis",
+      "forex",
+      "crypto",
+      "indicators"
+    ],
+    "searchUrlPattern": "https://www.tradingview.com/chart/?symbol={q}",
+    "exampleQueries": [
+      "NASDAQ:NVDA 1D chart",
+      "BTCUSD moving averages",
+      "SPY volume profile"
+    ]
+  },
+  {
+    "id": "coinmarketcap",
+    "name": "CoinMarketCap",
+    "domain": "coinmarketcap.com",
+    "alias": "coinmarketcap.com",
+    "url": "https://coinmarketcap.com",
+    "category": "finance",
+    "categoryLabel": "Cryptocurrency Market Capitalizations",
+    "usedFor": "Used for tracking cryptocurrency token prices, total market capitalization rankings, 24-hour trading volumes, circulating token supply, and smart contract addresses.",
+    "popularityScore": 93,
+    "launchYear": 2013,
+    "isLatest": false,
+    "keyStrengths": [
+      "Authoritative crypto market cap rankings",
+      "Live DEX and CEX volume tracking",
+      "Detailed tokenomics and blockchain contract links"
+    ],
+    "tags": [
+      "finance",
+      "crypto",
+      "bitcoin",
+      "ethereum",
+      "altcoins",
+      "coinmarketcap",
+      "marketcap",
+      "tokenomics",
+      "blockchain"
+    ],
+    "searchUrlPattern": "https://coinmarketcap.com/search/?q={q}",
+    "exampleQueries": [
+      "bitcoin live price",
+      "solana ecosystem tokens",
+      "top layer 2 blockchains"
+    ]
+  },
+  {
+    "id": "yahoo-finance",
+    "name": "Yahoo Finance",
+    "domain": "finance.yahoo.com",
+    "alias": "finance.yahoo.com",
+    "url": "https://finance.yahoo.com",
+    "category": "finance",
+    "categoryLabel": "Stock Quotes & Market News",
+    "usedFor": "Used for tracking real-time stock quotes, reading Wall Street financial news, reviewing quarterly corporate earnings balance sheets, and managing watchlists.",
+    "popularityScore": 96,
+    "launchYear": 1997,
+    "isLatest": false,
+    "keyStrengths": [
+      "Free historical stock price tables and CSV exports",
+      "Comprehensive corporate balance sheets and P/E ratios",
+      "Broad financial news wire aggregation"
+    ],
+    "tags": [
+      "finance",
+      "stocks",
+      "yahoo finance",
+      "investing",
+      "earnings",
+      "quotes",
+      "balance sheet",
+      "dividends"
+    ],
+    "searchUrlPattern": "https://finance.yahoo.com/lookup?s={q}",
+    "exampleQueries": [
+      "Apple AAPL earnings date",
+      "S&P 500 index history",
+      "high yield dividend stocks"
+    ]
+  },
+  {
+    "id": "stripe",
+    "name": "Stripe",
+    "domain": "stripe.com",
+    "alias": "stripe.com",
+    "url": "https://stripe.com",
+    "category": "finance",
+    "categoryLabel": "Global Payment Infrastructure",
+    "usedFor": "Used by developers and businesses to accept credit cards, manage recurring SaaS subscriptions, prevent credit fraud with Stripe Radar, and issue payouts globally.",
+    "popularityScore": 96,
+    "launchYear": 2010,
+    "isLatest": false,
+    "keyStrengths": [
+      "Industry standard developer payment APIs",
+      "Stripe Billing for subscription management",
+      "Global currency and payment method support"
+    ],
+    "tags": [
+      "finance",
+      "payments",
+      "stripe",
+      "credit cards",
+      "checkout",
+      "subscriptions",
+      "developer",
+      "api",
+      "invoicing"
+    ],
+    "searchUrlPattern": "https://stripe.com",
+    "exampleQueries": [
+      "stripe checkout integration",
+      "saas subscription billing",
+      "stripe webhook verification"
+    ]
+  },
+  {
+    "id": "google-maps",
+    "name": "Google Maps",
+    "domain": "maps.google.com",
+    "alias": "maps.google.com",
+    "url": "https://maps.google.com",
+    "category": "travel-maps",
+    "categoryLabel": "Navigation & Local Maps",
+    "usedFor": "Used for turn-by-turn GPS driving navigation, live traffic congestion updates, local restaurant ratings and hours, Street View photography, and public transit schedules.",
+    "popularityScore": 100,
+    "launchYear": 2005,
+    "isLatest": false,
+    "keyStrengths": [
+      "Unmatched global point-of-interest database",
+      "Real-time satellite traffic routing",
+      "Immersive Street View at street level"
+    ],
+    "tags": [
+      "travel",
+      "maps",
+      "google maps",
+      "navigation",
+      "directions",
+      "restaurants",
+      "gps",
+      "traffic",
+      "transit"
+    ],
+    "searchUrlPattern": "https://www.google.com/maps/search/{q}",
+    "exampleQueries": [
+      "ramen restaurants near me",
+      "directions to airport",
+      "hotels in central Kyoto"
+    ]
+  },
+  {
+    "id": "airbnb",
+    "name": "Airbnb",
+    "domain": "airbnb.com",
+    "alias": "airbnb.com",
+    "url": "https://www.airbnb.com",
+    "category": "travel-maps",
+    "categoryLabel": "Vacation Rentals & Unique Stays",
+    "usedFor": "Used for booking unique private vacation homes, cozy mountain cabins, beachfront villas, city lofts, and guided cultural experiences hosted by local residents.",
+    "popularityScore": 97,
+    "launchYear": 2008,
+    "isLatest": false,
+    "keyStrengths": [
+      "Millions of unique homes and architectural stays",
+      "Transparent guest reviews and host ratings",
+      "AirCover booking and cancellation protection"
+    ],
+    "tags": [
+      "travel",
+      "airbnb",
+      "vacation rentals",
+      "hotels",
+      "cabins",
+      "trips",
+      "stays",
+      "lodging"
+    ],
+    "searchUrlPattern": "https://www.airbnb.com/s/{q}/homes",
+    "exampleQueries": [
+      "lakefront cabin with hot tub",
+      "paris loft near louvre",
+      "bali villa with private pool"
+    ]
+  },
+  {
+    "id": "booking",
+    "name": "Booking.com",
+    "domain": "booking.com",
+    "alias": "booking.com",
+    "url": "https://www.booking.com",
+    "category": "travel-maps",
+    "categoryLabel": "Hotel & Flight Reservations",
+    "usedFor": "Used for reserving hotel rooms, flights, rental cars, and vacation resorts with flexible free cancellation options and Genius loyalty discounts worldwide.",
+    "popularityScore": 96,
+    "launchYear": 1996,
+    "isLatest": false,
+    "keyStrengths": [
+      "Extensive international hotel inventory",
+      "Transparent free cancellation policies",
+      "Genius tier travel discounts"
+    ],
+    "tags": [
+      "travel",
+      "booking",
+      "hotels",
+      "flights",
+      "reservations",
+      "car rental",
+      "motel",
+      "resorts"
+    ],
+    "searchUrlPattern": "https://www.booking.com/searchresults.html?ss={q}",
+    "exampleQueries": [
+      "hotels in london city centre",
+      "all inclusive cancun resort",
+      "rome boutique hotel with terrace"
+    ]
+  },
+  {
+    "id": "flightradar24",
+    "name": "Flightradar24",
+    "domain": "flightradar24.com",
+    "alias": "flightradar24.com",
+    "url": "https://www.flightradar24.com",
+    "category": "travel-maps",
+    "categoryLabel": "Live Global Flight Tracker",
+    "usedFor": "Used for tracking commercial and private airplanes live in real time on an interactive global map showing altitude, speed, aircraft type, and arrival ETA.",
+    "popularityScore": 91,
+    "launchYear": 2006,
+    "isLatest": false,
+    "keyStrengths": [
+      "Real-time ADS-B transponder flight tracking",
+      "Detailed aircraft age, model, and flight history",
+      "Live arrival delay monitoring"
+    ],
+    "tags": [
+      "travel",
+      "flightradar24",
+      "flights",
+      "airplanes",
+      "tracking",
+      "aviation",
+      "radar",
+      "airport"
+    ],
+    "searchUrlPattern": "https://www.flightradar24.com/{q}",
+    "exampleQueries": [
+      "live flight tracker JFK to LHR",
+      "boeing 787 dreamliner tracking",
+      "airport departure delays"
+    ]
+  },
+  {
+    "id": "hackernews",
+    "name": "Hacker News",
+    "domain": "news.ycombinator.com",
+    "alias": "news.ycombinator.com / YC",
+    "url": "https://news.ycombinator.com",
+    "category": "news-media",
+    "categoryLabel": "Tech & Startup News",
+    "usedFor": "Used by computer scientists, startup founders, and software engineers for sharing and discussing technical breakthroughs, open-source projects, and essays without clickbait.",
+    "popularityScore": 94,
+    "launchYear": 2007,
+    "isLatest": false,
+    "keyStrengths": [
+      "Ultra-high quality intellectual technical commentary",
+      "Zero algorithmic engagement manipulation",
+      "Show HN showcase for new developer tools"
+    ],
+    "tags": [
+      "news",
+      "hacker news",
+      "tech",
+      "startups",
+      "y combinator",
+      "programming",
+      "discussions",
+      "show hn"
+    ],
+    "searchUrlPattern": "https://hn.algolia.com/?q={q}",
+    "exampleQueries": [
+      "Show HN AI agent",
+      "Show HN SQLite full text search",
+      "Ask HN what is your favorite linux tool"
+    ]
+  },
+  {
+    "id": "theverge",
+    "name": "The Verge",
+    "domain": "theverge.com",
+    "alias": "theverge.com",
+    "url": "https://www.theverge.com",
+    "category": "news-media",
+    "categoryLabel": "Technology Journalism & Reviews",
+    "usedFor": "Used for reading in-depth consumer electronics reviews (smartphones, laptops), reporting on tech policy, electric vehicle innovations, and digital culture.",
+    "popularityScore": 93,
+    "launchYear": 2011,
+    "isLatest": false,
+    "keyStrengths": [
+      "Comprehensive hardware score reviews",
+      "Critical tech antitrust and policy reporting",
+      "Visually engaging digital storytelling"
+    ],
+    "tags": [
+      "news",
+      "the verge",
+      "tech news",
+      "gadgets",
+      "reviews",
+      "hardware",
+      "smartphones",
+      "laptops"
+    ],
+    "searchUrlPattern": "https://www.theverge.com/search?q={q}",
+    "exampleQueries": [
+      "best flagship smartphone review",
+      "apple vision pro 2 review",
+      "ai copyright policy"
+    ]
+  },
+  {
+    "id": "reuters",
+    "name": "Reuters",
+    "domain": "reuters.com",
+    "alias": "reuters.com",
+    "url": "https://www.reuters.com",
+    "category": "news-media",
+    "categoryLabel": "Global Breaking News & Wire",
+    "usedFor": "Used for reading factual, unbiased international wire journalism, financial market reports, geopolitical developments, and world breaking news without sensationalism.",
+    "popularityScore": 95,
+    "launchYear": 1851,
+    "isLatest": false,
+    "keyStrengths": [
+      "Gold standard impartial global reporting",
+      "Direct financial market wire coverage",
+      "Global bureau network across 200+ cities"
+    ],
+    "tags": [
+      "news",
+      "reuters",
+      "world news",
+      "journalism",
+      "politics",
+      "geopolitics",
+      "global",
+      "factual"
+    ],
+    "searchUrlPattern": "https://www.reuters.com/site-search/?query={q}",
+    "exampleQueries": [
+      "global central bank interest rates",
+      "clean energy transition policy",
+      "geopolitical trade accords"
+    ]
+  },
+  {
+    "id": "substack",
+    "name": "Substack",
+    "domain": "substack.com",
+    "alias": "substack.com",
+    "url": "https://substack.com",
+    "category": "news-media",
+    "categoryLabel": "Independent Newsletters & Essays",
+    "usedFor": "Used for reading and subscribing directly to independent writers, investigative journalists, technology analysts, and culture critics delivering newsletters to email inboxes.",
+    "popularityScore": 92,
+    "launchYear": 2017,
+    "isLatest": false,
+    "keyStrengths": [
+      "Direct relationship between authors and subscribers",
+      "In-depth long-form analytical essays",
+      "Vibrant reader comment sections"
+    ],
+    "tags": [
+      "news",
+      "substack",
+      "newsletters",
+      "essays",
+      "writers",
+      "journalism",
+      "reading",
+      "opinions"
+    ],
+    "searchUrlPattern": "https://substack.com/search/{q}",
+    "exampleQueries": [
+      "tech strategy newsletter",
+      "foreign policy deep dives",
+      "software engineering philosophy"
+    ]
+  },
+  {
+    "id": "khan-academy",
+    "name": "Khan Academy",
+    "domain": "khanacademy.org",
+    "alias": "khanacademy.org",
+    "url": "https://www.khanacademy.org",
+    "category": "education",
+    "categoryLabel": "Free K-12 Mastery Learning",
+    "usedFor": "Used by millions of students worldwide for free personalized learning in K-12 math, algebra, calculus, chemistry, biology, history, and official SAT test practice.",
+    "popularityScore": 96,
+    "launchYear": 2008,
+    "isLatest": false,
+    "keyStrengths": [
+      "100% free non-profit education for anyone, anywhere",
+      "Step-by-step mastery learning progression",
+      "Official College Board SAT prep partner"
+    ],
+    "tags": [
+      "education",
+      "khan academy",
+      "math",
+      "algebra",
+      "calculus",
+      "science",
+      "learn",
+      "students",
+      "school",
+      "sat"
+    ],
+    "searchUrlPattern": "https://www.khanacademy.org/search?page_search_query={q}",
+    "exampleQueries": [
+      "calculus derivatives introduction",
+      "organic chemistry reaction mechanisms",
+      "macroeconomics supply and demand"
+    ]
+  },
+  {
+    "id": "duolingo",
+    "name": "Duolingo",
+    "domain": "duolingo.com",
+    "alias": "duolingo.com",
+    "url": "https://www.duolingo.com",
+    "category": "education",
+    "categoryLabel": "Gamified Language Learning",
+    "usedFor": "Used for learning over 40 languages through gamified bite-sized daily lessons, speech recognition pronunciation drills, spaced repetition vocabulary, and streak motivation.",
+    "popularityScore": 97,
+    "launchYear": 2011,
+    "isLatest": false,
+    "keyStrengths": [
+      "Gamified daily streak habit builder",
+      "40+ languages from Spanish to Japanese",
+      "Short 5-minute bite-sized lessons"
+    ],
+    "tags": [
+      "education",
+      "duolingo",
+      "languages",
+      "spanish",
+      "french",
+      "japanese",
+      "learn language",
+      "vocab",
+      "streak"
+    ],
+    "searchUrlPattern": "https://www.duolingo.com",
+    "exampleQueries": [
+      "learn spanish beginner",
+      "conversational japanese phrases",
+      "duolingo streak tips"
+    ]
+  },
+  {
+    "id": "coursera",
+    "name": "Coursera",
+    "domain": "coursera.org",
+    "alias": "coursera.org",
+    "url": "https://www.coursera.org",
+    "category": "education",
+    "categoryLabel": "University Courses & Degrees",
+    "usedFor": "Used for taking online accredited courses, professional career certificates, and university degree programs taught by faculty from Stanford, Yale, Google, and IBM.",
+    "popularityScore": 94,
+    "launchYear": 2012,
+    "isLatest": false,
+    "keyStrengths": [
+      "Accredited certificates from Ivy League universities",
+      "Industry recognized professional credentials",
+      "Comprehensive video lectures and peer assignments"
+    ],
+    "tags": [
+      "education",
+      "coursera",
+      "courses",
+      "certificates",
+      "university",
+      "degrees",
+      "online learning",
+      "stanford"
+    ],
+    "searchUrlPattern": "https://www.coursera.org/search?query={q}",
+    "exampleQueries": [
+      "Machine Learning Specialization Stanford",
+      "Google Data Analytics Certificate",
+      "Deep Learning Andrew Ng"
+    ]
+  },
+  {
+    "id": "car-search",
+    "name": "CarSearch",
+    "domain": "car-search.netlify.app",
+    "alias": "CarSearch.net",
+    "url": "https://car-search.netlify.app",
+    "category": "automotive",
+    "categoryLabel": "Specialized Automotive Specs",
+    "usedFor": "Used for isolated automotive spec queries comparing horsepower, 0-60 acceleration times, curb weights, and engine trims without aggressive dealership lead-gen spam.",
+    "popularityScore": 86,
+    "launchYear": 2024,
+    "isLatest": true,
+    "isFeaturedSpecialized": true,
+    "tagLine": "Isolated vehicle specifications, horsepower, and 0-60 times without dealer spam.",
+    "bestForDescription": "Raw horsepower figures, curb weights, 0-60 acceleration times, and engine trims.",
+    "bestForBullets": [
+      "Filters out local car dealership lead-capture phone forms",
+      "Direct spec comparison across model generations and trim levels",
+      "Unbiased mechanical displacement, torque curves, and curb weights"
+    ],
+    "keyStrengths": [
+      "Zero dealership lead popups",
+      "Instant horsepower & 0-60 specs",
+      "Trim level comparisons"
+    ],
+    "tags": [
+      "automotive",
+      "carsearch",
+      "cars",
+      "specs",
+      "horsepower",
+      "0-60",
+      "vehicles",
+      "engines",
+      "curb weight"
+    ],
+    "searchUrlPattern": "https://car-search.netlify.app/?q={q}",
+    "exampleQueries": [
+      "2024 Honda Civic Type R vs Toyota GR Corolla specs",
+      "Porsche 911 GT3 RS curb weight 0-60",
+      "BMW M3 engine displacement horsepower"
+    ]
+  },
+  {
+    "id": "edmunds",
+    "name": "Edmunds",
+    "domain": "edmunds.com",
+    "alias": "edmunds.com",
+    "url": "https://www.edmunds.com",
+    "category": "automotive",
+    "categoryLabel": "Automotive Reviews & Appraisals",
+    "usedFor": "Used for automotive consumer buying advice, expert instrumented road tests, fair market pricing evaluations, and true 5-year cost to own calculations.",
+    "popularityScore": 92,
+    "launchYear": 1995,
+    "isLatest": false,
+    "keyStrengths": [
+      "Instrumented track testing evaluations",
+      "True Cost to Own (TCO) calculator",
+      "Fair market pricing benchmark"
+    ],
+    "tags": [
+      "automotive",
+      "cars",
+      "edmunds",
+      "reviews",
+      "appraisal",
+      "buying car",
+      "pricing",
+      "road test"
+    ],
+    "searchUrlPattern": "https://www.edmunds.com/search/?q={q}",
+    "exampleQueries": [
+      "best compact suv 2026",
+      "edmunds ev range leaderboard",
+      "true cost to own honda cr-v"
+    ]
+  },
+  {
+    "id": "bring-a-trailer",
+    "name": "Bring a Trailer",
+    "domain": "bringatrailer.com",
+    "alias": "bringatrailer.com / BaT",
+    "url": "https://bringatrailer.com",
+    "category": "automotive",
+    "categoryLabel": "Curated Enthusiast Car Auctions",
+    "usedFor": "Used for online auction bidding on vintage, collector, and enthusiast cars with detailed high-resolution photo galleries and crowdsourced automotive commentary.",
+    "popularityScore": 90,
+    "launchYear": 2007,
+    "isLatest": false,
+    "keyStrengths": [
+      "Vetted collector and classic automobiles",
+      "Enthusiast community peer fact-checking",
+      "Transparent real-time auction bidding"
+    ],
+    "tags": [
+      "automotive",
+      "cars",
+      "bring a trailer",
+      "auctions",
+      "vintage cars",
+      "classic cars",
+      "collector"
+    ],
+    "searchUrlPattern": "https://bringatrailer.com/search/?s={q}",
+    "exampleQueries": [
+      "air-cooled porsche 911",
+      "e30 bmw m3 auction",
+      "vintage toyota land cruiser fj40"
+    ]
+  },
+  {
+    "id": "google-scholar",
+    "name": "Google Scholar",
+    "domain": "scholar.google.com",
+    "alias": "scholar.google.com",
+    "url": "https://scholar.google.com",
+    "category": "academic-science",
+    "categoryLabel": "Scholarly Literature & Citations",
+    "usedFor": "Used for searching peer-reviewed research papers, doctoral theses, books, abstracts, and court opinions across all academic disciplines, with full citation counts.",
+    "popularityScore": 96,
+    "launchYear": 2004,
+    "isLatest": false,
+    "keyStrengths": [
+      "Indexes millions of peer-reviewed journal papers",
+      "Automatic citation metrics and h-index tracking",
+      "Direct links to university open-access PDFs"
+    ],
+    "tags": [
+      "academic",
+      "scholar",
+      "papers",
+      "research",
+      "citations",
+      "peer reviewed",
+      "thesis",
+      "science",
+      "university"
+    ],
+    "searchUrlPattern": "https://scholar.google.com/scholar?q={q}",
+    "exampleQueries": [
+      "crispr cas9 gene editing clinical trials",
+      "attention is all you need vaswani",
+      "climate change ocean acidification"
+    ]
+  },
+  {
+    "id": "arxiv",
+    "name": "arXiv",
+    "domain": "arxiv.org",
+    "alias": "arxiv.org",
+    "url": "https://arxiv.org",
+    "category": "academic-science",
+    "categoryLabel": "Open Scientific Preprints",
+    "usedFor": "Used by physicists, mathematicians, and AI researchers to publish and read open-access scientific research preprints before formal peer review journal publication.",
+    "popularityScore": 93,
+    "launchYear": 1991,
+    "isLatest": false,
+    "keyStrengths": [
+      "Gold standard preprint repository for AI and physics",
+      "100% free open-access full-text PDFs",
+      "Fastest dissemination of scientific breakthroughs"
+    ],
+    "tags": [
+      "academic",
+      "arxiv",
+      "preprints",
+      "physics",
+      "math",
+      "computer science",
+      "ai research",
+      "papers"
+    ],
+    "searchUrlPattern": "https://arxiv.org/search/?query={q}&searchtype=all",
+    "exampleQueries": [
+      "reasoning capabilities in large language models",
+      "topological quantum computing",
+      "black hole thermodynamics"
+    ]
+  },
+  {
+    "id": "pubmed",
+    "name": "PubMed",
+    "domain": "pubmed.ncbi.nlm.nih.gov",
+    "alias": "pubmed.gov / NIH",
+    "url": "https://pubmed.ncbi.nlm.nih.gov",
+    "category": "academic-science",
+    "categoryLabel": "Biomedical & Life Sciences Literature",
+    "usedFor": "Used by doctors, medical researchers, and students to search over 36 million biomedical literature citations and abstracts from MEDLINE and life science journals.",
+    "popularityScore": 94,
+    "launchYear": 1996,
+    "isLatest": false,
+    "keyStrengths": [
+      "Authoritative national biomedical database (NIH)",
+      "MeSH indexing for precise clinical queries",
+      "Essential for evidence-based medicine"
+    ],
+    "tags": [
+      "academic",
+      "medicine",
+      "pubmed",
+      "biomedical",
+      "clinical trials",
+      "health",
+      "biology",
+      "doctors"
+    ],
+    "searchUrlPattern": "https://pubmed.ncbi.nlm.nih.gov/?term={q}",
+    "exampleQueries": [
+      "glp-1 receptor agonists cardiovascular outcomes",
+      "immunotherapy melanoma survival rates",
+      "microbiome cognitive function"
+    ]
+  },
+  {
+    "id": "blob-search",
+    "name": "BlobSearch",
+    "domain": "blob-search.vercel.app",
+    "alias": "BlobSearch.com",
+    "url": "https://blob-search.vercel.app",
+    "category": "cloud-storage",
+    "categoryLabel": "Specialized Cloud Data Blobs",
+    "usedFor": "Used for discovering public cloud object storage containers (AWS S3, Azure Blob, GCS), raw parquet tables, binary data dumps, and machine learning model weights.",
+    "popularityScore": 85,
+    "launchYear": 2024,
+    "isLatest": true,
+    "isFeaturedSpecialized": true,
+    "tagLine": "Crawls open cloud storage buckets (S3, Azure, GCS) for raw data & model weights.",
+    "bestForDescription": "Unstructured data dumps, Parquet/Arrow tables, open S3 buckets, and model checkpoints.",
+    "bestForBullets": [
+      "Filters by MIME types (.parquet, .arrow, .bin, .safetensors)",
+      "Identifies open public cloud buckets without authorization barriers",
+      "Targeted for data scientists and ML infrastructure teams"
+    ],
+    "keyStrengths": [
+      "Public S3 bucket discovery",
+      "Parquet & binary dump indexing",
+      "Weights & training data finder"
+    ],
+    "tags": [
+      "blobs",
+      "cloud",
+      "blobsearch",
+      "s3",
+      "storage",
+      "data",
+      "datasets",
+      "parquet",
+      "safetensors",
+      "buckets"
+    ],
+    "searchUrlPattern": "https://blob-search.vercel.app/?q={q}",
+    "exampleQueries": [
+      "public s3 bucket climate parquet dataset",
+      "open image classification binary weights",
+      "geospatial lidar point cloud dumps"
+    ]
+  },
+  {
+    "id": "aws",
+    "name": "AWS S3 & Cloud",
+    "domain": "aws.amazon.com",
+    "alias": "aws.amazon.com",
+    "url": "https://aws.amazon.com",
+    "category": "cloud-storage",
+    "categoryLabel": "Enterprise Cloud Infrastructure",
+    "usedFor": "Used for enterprise cloud computing (EC2), scalable object storage (Amazon S3), serverless functions (AWS Lambda), and running internet backend infrastructure.",
+    "popularityScore": 98,
+    "launchYear": 2006,
+    "isLatest": false,
+    "keyStrengths": [
+      "Industry leading cloud infrastructure market share",
+      "99.999999999% (11 9s) S3 data durability",
+      "Over 200 fully featured cloud services"
+    ],
+    "tags": [
+      "cloud",
+      "aws",
+      "s3",
+      "storage",
+      "serverless",
+      "lambda",
+      "devops",
+      "enterprise",
+      "infrastructure"
+    ],
+    "searchUrlPattern": "https://aws.amazon.com/search/?searchQuery={q}",
+    "exampleQueries": [
+      "s3 bucket lifecycle policies",
+      "lambda cold start optimization",
+      "dynamodb global tables"
+    ]
+  },
+  {
+    "id": "cloudflare",
+    "name": "Cloudflare",
+    "domain": "cloudflare.com",
+    "alias": "cloudflare.com",
+    "url": "https://www.cloudflare.com",
+    "category": "cloud-storage",
+    "categoryLabel": "Global CDN, DNS & Edge Workers",
+    "usedFor": "Used for accelerating web application performance via global edge CDN caching, mitigating massive DDoS cyberattacks, DNS resolution (1.1.1.1), and zero-trust security.",
+    "popularityScore": 97,
+    "launchYear": 2010,
+    "isLatest": false,
+    "keyStrengths": [
+      "Protects ~20% of the entire internet",
+      "Ultra-fast global 1.1.1.1 DNS resolution",
+      "Cloudflare Workers low-latency serverless execution"
+    ],
+    "tags": [
+      "cloud",
+      "cloudflare",
+      "cdn",
+      "security",
+      "ddos",
+      "dns",
+      "workers",
+      "edge",
+      "ssl"
+    ],
+    "searchUrlPattern": "https://www.cloudflare.com",
+    "exampleQueries": [
+      "cloudflare r2 zero egress storage",
+      "turnstile bot protection",
+      "workers kv caching"
+    ]
+  },
+  {
+    "id": "smallpdf",
+    "name": "Smallpdf",
+    "domain": "smallpdf.com",
+    "alias": "smallpdf.com",
+    "url": "https://smallpdf.com",
+    "category": "utilities",
+    "categoryLabel": "PDF Converter & Compression",
+    "usedFor": "Used for converting PDF documents to Word/Excel, compressing large PDF file sizes, merging multiple documents, splitting pages, and adding legal electronic signatures.",
+    "popularityScore": 93,
+    "launchYear": 2013,
+    "isLatest": false,
+    "keyStrengths": [
+      "In-browser PDF compression without software downloads",
+      "High-accuracy PDF to Word conversion",
+      "Simple drag-and-drop document tools"
+    ],
+    "tags": [
+      "utilities",
+      "pdf",
+      "smallpdf",
+      "compress",
+      "convert",
+      "merge pdf",
+      "esign",
+      "document tools"
+    ],
+    "searchUrlPattern": "https://smallpdf.com",
+    "exampleQueries": [
+      "compress pdf size online",
+      "convert pdf to editable word",
+      "merge two pdf documents"
+    ]
+  },
+  {
+    "id": "speedtest",
+    "name": "Speedtest by Ookla",
+    "domain": "speedtest.net",
+    "alias": "speedtest.net",
+    "url": "https://www.speedtest.net",
+    "category": "utilities",
+    "categoryLabel": "Internet Bandwidth & Latency Benchmark",
+    "usedFor": "Used for accurately benchmarking internet connection speeds, measuring download Mbps, upload bandwidth, ping latency, and jitter across global testing servers.",
+    "popularityScore": 96,
+    "launchYear": 2006,
+    "isLatest": false,
+    "keyStrengths": [
+      "Global standard for internet speed testing",
+      "Measures real-time loaded latency and jitter",
+      "Thousands of distributed global test servers"
+    ],
+    "tags": [
+      "utilities",
+      "speedtest",
+      "internet speed",
+      "bandwidth",
+      "ping",
+      "latency",
+      "wifi",
+      "broadband"
+    ],
+    "searchUrlPattern": "https://www.speedtest.net",
+    "exampleQueries": [
+      "check wifi speed",
+      "test ping for gaming",
+      "upload bandwidth benchmark"
+    ]
+  },
+  {
+    "id": "virustotal",
+    "name": "VirusTotal",
+    "domain": "virustotal.com",
+    "alias": "virustotal.com / Google",
+    "url": "https://www.virustotal.com",
+    "category": "utilities",
+    "categoryLabel": "Malware & URL Threat Scanner",
+    "usedFor": "Used for inspecting suspicious files, URLs, domains, and IP addresses using over 70 commercial antivirus engines and threat intelligence scanners simultaneously.",
+    "popularityScore": 92,
+    "launchYear": 2004,
+    "isLatest": false,
+    "keyStrengths": [
+      "Simultaneous scanning with 70+ antivirus engines",
+      "Behavioral sandbox execution analysis",
+      "Global threat intelligence community"
+    ],
+    "tags": [
+      "utilities",
+      "security",
+      "virustotal",
+      "antivirus",
+      "malware",
+      "phishing",
+      "scan file",
+      "url checker"
+    ],
+    "searchUrlPattern": "https://www.virustotal.com/gui/search/{q}",
+    "exampleQueries": [
+      "scan url for phishing",
+      "check suspicious hash",
+      "virustotal ip reputation"
+    ]
+  }
+];
+
+    const CATEGORIES = [
+      { id: 'all', label: 'All Websites (Everything)' },
+      { id: 'search-knowledge', label: 'Search & Knowledge' },
+      { id: 'ai', label: 'AI & LLMs' },
+      { id: 'video-streaming', label: 'Video & Streaming' },
+      { id: 'social-community', label: 'Social & Communities' },
+      { id: 'shopping', label: 'Shopping & E-Commerce' },
+      { id: 'music-audio', label: 'Music & Audio' },
+      { id: 'productivity', label: 'Productivity & Workspace' },
+      { id: 'coding', label: 'Coding & Dev' },
+      { id: 'gaming', label: 'Gaming & Esports' },
+      { id: 'design', label: 'Design & Creative' },
+      { id: 'finance', label: 'Finance & Crypto' },
+      { id: 'travel-maps', label: 'Travel & Maps' },
+      { id: 'news-media', label: 'News & Tech' },
+      { id: 'education', label: 'Education & Languages' },
+      { id: 'automotive', label: 'Automotive & Specs' },
+      { id: 'academic-science', label: 'Academic & Science' },
+      { id: 'cloud-storage', label: 'Cloud, Storage & Blobs' },
+      { id: 'utilities', label: 'Utilities & Security' },
+      { id: 'featured-specialized', label: 'Specialized Hubs' }
+    ];
+
+    // State
+    let currentCategory = 'all';
+    let currentFilterText = '';
+    let currentSortMode = 'popularity'; // 'popularity' | 'latest' | 'alpha'
+    let activeTab = 'directory'; // 'directory' | 'specialized' | 'decision' | 'comparison'
+
+    // Intent Analyzer Function
+    function analyzeQuery(rawQuery) {
+      const query = (rawQuery || '').trim();
+      const lower = query.toLowerCase();
+
+      if (!query || lower === 'everything' || lower === 'all' || lower === 'all websites') {
+        const google = ALL_WEBSITES.find(s => s.id === 'google') || ALL_WEBSITES[0];
+        const wiki = ALL_WEBSITES.find(s => s.id === 'wikipedia');
+        const yt = ALL_WEBSITES.find(s => s.id === 'youtube');
+        return {
+          query: query || 'everything',
+          intent: 'Universal Web Index (Everything on the Web)',
+          bestMatch: google,
+          confidence: 99,
+          whyBest: 'Google indexes over a trillion web pages and acts as the universal index for everything on the web.',
+          tips: 'Browse the catalog below or filter by category to see what any website is used for.',
+          alternatives: [wiki, yt].filter(Boolean),
+          searchUrl: 'https://www.google.com/search?q=' + encodeURIComponent(query || 'everything')
+        };
+      }
+
+      // Score websites
+      const scored = ALL_WEBSITES.map(site => {
+        let score = 0;
+        if (lower === site.name.toLowerCase() || lower === site.domain.toLowerCase()) score += 80;
+        else if (lower.includes(site.name.toLowerCase()) || lower.includes(site.domain.toLowerCase())) score += 45;
+
+        for (const tag of (site.tags || [])) {
+          if (lower.includes(tag.toLowerCase())) score += 25;
+        }
+
+        // Domain-specific boosts
+        if (site.id === 'game-search' && /\b(game|boss|mechanics|weakness|drop|loot|speedrun|elden|build)\b/i.test(lower)) score += 50;
+        if (site.id === 'def-search' && /\b(def|definition|meaning|acronym|etymology|jargon|lexicon|word)\b/i.test(lower)) score += 50;
+        if (site.id === 'car-search' && /\b(car|specs|horsepower|0-60|curb weight|engine|torque|honda|toyota|bmw|porsche)\b/i.test(lower)) score += 50;
+        if (site.id === 'blob-search' && /\b(blob|parquet|s3|bucket|dataset|binary|dump)\b/i.test(lower)) score += 50;
+
+        if (site.category === 'coding' && /\b(code|coding|dev|developer|programming|git|repo|syntax|debug|nextjs|react|typescript)\b/i.test(lower)) score += 40;
+        if (site.category === 'ai' && /\b(ai|llm|chatgpt|claude|prompt|model|weights)\b/i.test(lower)) score += 40;
+        if (site.category === 'shopping' && /\b(shop|shopping|buy|order|price|store|cart)\b/i.test(lower)) score += 40;
+        if (site.category === 'music-audio' && /\b(music|audio|song|listen|stream|beats|playlist)\b/i.test(lower)) score += 40;
+
+        return { site, score };
+      });
+
+      scored.sort((a, b) => {
+        if (b.score !== a.score) return b.score - a.score;
+        return b.site.popularityScore - a.site.popularityScore;
+      });
+
+      const top = scored[0];
+      const match = top.site;
+      const confidence = Math.min(99, Math.max(55, top.score + 25));
+      const searchUrl = match.searchUrlPattern 
+        ? match.searchUrlPattern.replace('{q}', encodeURIComponent(query))
+        : match.url;
+
+      return {
+        query,
+        intent: top.score > 20 ? match.categoryLabel + ' Query' : 'General Web Search',
+        bestMatch: match,
+        confidence,
+        whyBest: match.name + ' (' + match.domain + ') is best for this: ' + match.usedFor,
+        tips: (match.keyStrengths || []).join(' • '),
+        alternatives: scored.slice(1, 3).map(s => s.site),
+        searchUrl
+      };
+    }
+
+    // Render Intent Result Card
+    function renderIntentCard(analysis) {
+      const container = document.getElementById('intent-result-card');
+      const match = analysis.bestMatch;
+
+      container.innerHTML = `
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-stone-200">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-amber-100 text-amber-800 border border-amber-300">
+              ${analysis.intent}
+            </span>
+            <span class="text-xs font-mono text-stone-500">
+              Confidence: ${analysis.confidence}%
+            </span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-stone-500">Best Match:</span>
+            <span class="text-xs font-black text-stone-900 bg-stone-100 px-2 py-0.5 rounded border border-stone-300">
+              ${match.name}
+            </span>
+          </div>
+        </div>
+
+        <div class="mt-3.5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <h4 class="text-base font-bold text-stone-900 flex items-center gap-2">
+              <span>${match.name}</span>
+              <span class="text-xs font-mono font-normal text-stone-500">(${match.domain})</span>
+            </h4>
+            <p class="text-xs text-stone-700 leading-relaxed">
+              ${analysis.whyBest}
+            </p>
+            ${analysis.tips ? `<p class="text-[11px] font-mono text-amber-800 mt-1">Strengths: ${analysis.tips}</p>` : ''}
+          </div>
+
+          <div class="shrink-0 flex items-center gap-2">
+            <button onclick="openWebsiteModal('${match.id}')" class="px-3.5 py-2 text-xs font-semibold text-stone-700 bg-stone-100 hover:bg-stone-200 rounded-xl transition-colors">
+              Details
+            </button>
+            <a href="${analysis.searchUrl}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 text-xs font-semibold text-white bg-amber-600 hover:bg-amber-700 rounded-xl flex items-center gap-1.5 shadow-sm transition-colors">
+              <span>Launch Search</span>
+              <i data-lucide="external-link" class="w-3 h-3"></i>
+            </a>
+          </div>
+        </div>
+
+        ${analysis.alternatives.length > 0 ? `
+          <div class="mt-3 pt-3 border-t border-stone-100 flex items-center gap-2 text-xs text-stone-500">
+            <span class="font-semibold text-stone-600">Alternative Options:</span>
+            ${analysis.alternatives.map(alt => `
+              <button onclick="openWebsiteModal('${alt.id}')" class="underline hover:text-amber-700">
+                ${alt.name}
+              </button>
+            `).join('<span class="text-stone-300">•</span>')}
+          </div>
+        ` : ''}
+      `;
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    // Switch View Tab
+    function switchTab(tabId) {
+      activeTab = tabId;
+      const tabs = ['directory', 'specialized', 'decision', 'comparison'];
+      tabs.forEach(t => {
+        const el = document.getElementById('tab-' + t);
+        const btn = document.getElementById('nav-btn-' + t);
+        if (el) {
+          if (t === tabId) {
+            el.classList.remove('hidden');
+          } else {
+            el.classList.add('hidden');
+          }
+        }
+        if (btn) {
+          if (t === tabId) {
+            btn.className = 'px-3.5 py-1.5 rounded-lg transition-all text-stone-900 bg-white shadow-sm font-semibold';
+          } else {
+            btn.className = 'px-3.5 py-1.5 rounded-lg transition-all text-stone-600 hover:text-stone-900 font-semibold';
+          }
+        }
+      });
+      window.scrollTo({ top: 400, behavior: 'smooth' });
+    }
+
+    // Render Categories Pill Bar
+    function renderCategoryPills() {
+      const container = document.getElementById('categories-pill-bar');
+      container.innerHTML = CATEGORIES.map(cat => {
+        const count = cat.id === 'all' 
+          ? ALL_WEBSITES.length 
+          : cat.id === 'featured-specialized'
+          ? ALL_WEBSITES.filter(s => s.isFeaturedSpecialized).length
+          : ALL_WEBSITES.filter(s => s.category === cat.id).length;
+
+        const isActive = currentCategory === cat.id;
+        const activeClass = isActive 
+          ? 'bg-amber-600 text-white font-bold shadow-sm' 
+          : 'bg-white text-stone-700 hover:bg-stone-50 border border-stone-200/80 font-medium';
+
+        return `
+          <button 
+            onclick="setCategory('${cat.id}')"
+            class="px-3 py-1.5 rounded-xl text-xs whitespace-nowrap transition-all flex items-center gap-1.5 ${activeClass}"
+          >
+            <span>${cat.label}</span>
+            <span class="${isActive ? 'bg-amber-700 text-amber-100' : 'bg-stone-100 text-stone-600'} text-[10px] px-1.5 py-0.2 rounded-full font-mono">
+              ${count}
+            </span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    // Set Active Category
+    function setCategory(catId) {
+      currentCategory = catId;
+      renderCategoryPills();
+      renderDirectoryWebsites();
+    }
+
+    // Set Directory Sort Mode
+    function setSortMode(mode) {
+      currentSortMode = mode;
+      const modes = ['popularity', 'latest', 'alpha'];
+      modes.forEach(m => {
+        const btn = document.getElementById('sort-btn-' + (m === 'alpha' ? 'alpha' : m));
+        if (btn) {
+          if (m === mode) {
+            btn.className = 'px-2.5 py-1 rounded bg-white text-stone-900 font-semibold shadow-2xs';
+          } else {
+            btn.className = 'px-2.5 py-1 rounded text-stone-600 hover:text-stone-900 font-semibold';
+          }
+        }
+      });
+      renderDirectoryWebsites();
+    }
+
+    // Filter Directory Input
+    function handleDirectoryFilter(text) {
+      currentFilterText = text;
+      renderDirectoryWebsites();
+    }
+
+    // Render Websites Grid
+    function renderDirectoryWebsites() {
+      const grid = document.getElementById('websites-grid');
+      const countBadge = document.getElementById('directory-count-badge');
+
+      let filtered = ALL_WEBSITES.filter(site => {
+        // Category filter
+        if (currentCategory !== 'all') {
+          if (currentCategory === 'featured-specialized') {
+            if (!site.isFeaturedSpecialized) return false;
+          } else if (site.category !== currentCategory) {
+            return false;
+          }
+        }
+
+        // Text search filter
+        if (!currentFilterText.trim()) return true;
+        const term = currentFilterText.toLowerCase();
+        if (term === 'everything' || term === 'all') return true;
+
+        return (
+          site.name.toLowerCase().includes(term) ||
+          site.domain.toLowerCase().includes(term) ||
+          site.usedFor.toLowerCase().includes(term) ||
+          site.category.toLowerCase().includes(term) ||
+          (site.tags || []).some(t => t.toLowerCase().includes(term))
+        );
+      });
+
+      // Sorting
+      if (currentSortMode === 'popularity') {
+        filtered.sort((a, b) => b.popularityScore - a.popularityScore);
+      } else if (currentSortMode === 'latest') {
+        filtered.sort((a, b) => b.launchYear - a.launchYear);
+      } else if (currentSortMode === 'alpha') {
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+      }
+
+      countBadge.innerText = filtered.length + ' Websites';
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-12 text-center bg-white rounded-2xl border border-stone-200">
+            <p class="text-stone-500 font-medium">No websites found matching "${currentFilterText}".</p>
+            <button onclick="clearDirectoryFilter()" class="mt-3 px-4 py-1.5 text-xs bg-amber-600 text-white rounded-lg font-semibold">
+              Reset Filters
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(site => {
+        const isFeatured = site.isFeaturedSpecialized;
+        return `
+          <div class="bg-white rounded-2xl border ${isFeatured ? 'border-amber-300 ring-1 ring-amber-400/30' : 'border-stone-200/90'} p-5 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between group">
+            <div>
+              <!-- Header: Name, Year & Popularity -->
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <div>
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <h3 class="font-bold text-stone-900 group-hover:text-amber-800 transition-colors">
+                      ${site.name}
+                    </h3>
+                    ${isFeatured ? '<span class="text-[10px] font-bold bg-amber-500 text-white px-1.5 py-0.2 rounded">SPECIALIZED</span>' : ''}
+                  </div>
+                  <span class="text-xs font-mono text-stone-400">${site.domain}</span>
+                </div>
+                <div class="text-right">
+                  <span class="text-[11px] font-mono text-stone-500 font-bold">${site.launchYear}</span>
+                  <div class="w-14 bg-stone-100 rounded-full h-1.5 mt-1 overflow-hidden">
+                    <div class="bg-amber-500 h-1.5 rounded-full" style="width: ${site.popularityScore}%"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Category Badge -->
+              <div class="mb-3">
+                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-stone-100 text-stone-600 border border-stone-200">
+                  ${site.categoryLabel || site.category}
+                </span>
+              </div>
+
+              <!-- What it is used for -->
+              <div class="mb-4">
+                <span class="text-[11px] font-bold text-stone-400 uppercase tracking-wider block mb-0.5">What it's used for:</span>
+                <p class="text-xs text-stone-700 leading-relaxed font-sans line-clamp-3">
+                  ${site.usedFor}
+                </p>
+              </div>
+
+              <!-- Key Strengths -->
+              ${site.keyStrengths && site.keyStrengths.length > 0 ? `
+                <div class="mb-4 flex flex-wrap gap-1">
+                  ${site.keyStrengths.slice(0, 2).map(s => `
+                    <span class="text-[10px] px-2 py-0.5 rounded bg-stone-50 text-stone-600 border border-stone-200">
+                      ✓ ${s}
+                    </span>
+                  `).join('')}
+                </div>
+              ` : ''}
+            </div>
+
+            <!-- Footer Actions -->
+            <div class="pt-3 border-t border-stone-100 flex items-center justify-between gap-2 mt-2">
+              <button onclick="openWebsiteModal('${site.id}')" class="text-xs font-semibold text-stone-600 hover:text-stone-900 transition-colors">
+                View Specs
+              </button>
+              <a href="${site.url}" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-stone-900 text-white hover:bg-stone-800 flex items-center gap-1 shadow-2xs transition-colors">
+                <span>Visit</span>
+                <i data-lucide="external-link" class="w-3 h-3"></i>
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    function clearDirectoryFilter() {
+      currentFilterText = '';
+      currentCategory = 'all';
+      document.getElementById('directory-filter-input').value = '';
+      renderCategoryPills();
+      renderDirectoryWebsites();
+    }
+
+    // Render Specialized Hubs View
+    function renderSpecializedHubs() {
+      const hubs = ALL_WEBSITES.filter(s => s.isFeaturedSpecialized);
+      const container = document.getElementById('specialized-hubs-grid');
+
+      container.innerHTML = hubs.map(hub => `
+        <div class="bg-white rounded-2xl border-2 border-amber-300 p-6 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-start justify-between gap-2 mb-3">
+              <div>
+                <span class="text-[10px] font-bold font-mono px-2 py-0.5 rounded bg-amber-500 text-white">
+                  CORE SPECIALIZED ENGINE
+                </span>
+                <h3 class="text-2xl font-black text-stone-900 mt-2">
+                  ${hub.name}
+                </h3>
+                <p class="text-xs font-mono text-amber-700 font-bold">${hub.domain} (${hub.alias})</p>
+              </div>
+              <span class="text-xs font-mono font-bold bg-stone-100 text-stone-700 px-2 py-1 rounded">
+                ${hub.launchYear}
+              </span>
+            </div>
+
+            <p class="text-xs text-stone-600 font-medium mb-4 italic">
+              "${hub.tagLine || hub.usedFor}"
+            </p>
+
+            <div class="mb-4">
+              <span class="text-xs font-bold text-stone-900 block mb-1">Best For:</span>
+              <p class="text-xs text-stone-800 font-semibold mb-2">
+                ${hub.bestForDescription || hub.usedFor}
+              </p>
+              <ul class="space-y-1 text-xs text-stone-600">
+                ${(hub.bestForBullets || hub.keyStrengths || []).map(b => `
+                  <li class="flex items-start gap-1.5">
+                    <span class="text-amber-600 font-bold">•</span>
+                    <span>${b}</span>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+
+            <!-- Try Queries -->
+            <div class="pt-3 border-t border-stone-100 mb-4">
+              <span class="text-[10px] font-mono uppercase text-stone-400 block mb-1.5">
+                Specialized Query Presets:
+              </span>
+              <div class="flex flex-wrap gap-1.5">
+                ${(hub.exampleQueries || []).map(q => `
+                  <button onclick="setQueryAndAnalyze('${q.replace(/'/g, "\\'")}')" class="text-xs text-left px-2 py-1 bg-stone-50 hover:bg-amber-50 hover:text-amber-900 rounded border border-stone-200 transition-colors font-mono">
+                    "${q}"
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-stone-100 flex items-center justify-between gap-3">
+            <button onclick="openWebsiteModal('${hub.id}')" class="text-xs font-semibold text-stone-700 hover:text-stone-900">
+              Technical Details
+            </button>
+            <a href="${hub.url}" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl bg-amber-600 text-white hover:bg-amber-700 font-semibold text-xs flex items-center gap-1.5 shadow-sm">
+              <span>Launch ${hub.alias}</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+      `).join('');
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    // Render Decision Guide Scenarios
+    function renderDecisionScenarios() {
+      const scenarios = [
+        {
+          intent: 'Software Development & Hosting',
+          desc: 'Deploying frontend web apps, managing Git repos, or looking up syntax error solutions.',
+          best: ['GitHub', 'Vercel', 'Stack Overflow', 'Supabase'],
+          query: 'coding'
+        },
+        {
+          intent: 'Boss Weaknesses, Stat Scalings & Drop Rates',
+          desc: 'Looking up Elden Ring Malenia weaknesses, speedrun routes, or weapon frame data without ad filler.',
+          best: ['Game Search (GS.com)', 'Steam', 'Nexus Mods'],
+          query: 'Elden Ring Malenia weaknesses & bleed build'
+        },
+        {
+          intent: 'Jargon & Technical Acronym Decoding',
+          desc: 'Deciphering obscure technical jargon, software terms, or etymological origins.',
+          best: ['DefSearch (DefSearch.net)', 'Merriam-Webster', 'Wikipedia'],
+          query: 'what does epistemic humility mean'
+        },
+        {
+          intent: 'Automotive Telemetry & Horsepower Specs',
+          desc: 'Comparing curb weights, 0-60 times, engine trims, and track telemetry without dealer leads.',
+          best: ['CarSearch (CarSearch.net)', 'Bring a Trailer', 'Edmunds'],
+          query: '2024 Honda Civic Type R specs'
+        },
+        {
+          intent: 'Public Datasets & Binary S3 Blobs',
+          desc: 'Finding Parquet data dumps, open AI training checkpoints, or raw object storage prefixes.',
+          best: ['BlobSearch (BlobSearch.com)', 'Hugging Face', 'Internet Archive'],
+          query: 'public s3 bucket climate parquet dataset'
+        },
+        {
+          intent: 'Universal Knowledge & Fact Checking',
+          desc: 'Reading referenced encyclopedia articles, historical timelines, and mathematical theorems.',
+          best: ['Google', 'Wikipedia', 'WolframAlpha'],
+          query: 'everything'
+        }
+      ];
+
+      const container = document.getElementById('decision-scenarios-grid');
+      container.innerHTML = scenarios.map(sc => `
+        <div class="bg-white rounded-2xl border border-stone-200 p-5 shadow-2xs hover:border-amber-300 transition-all flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-stone-900 text-base mb-1">
+              ${sc.intent}
+            </h4>
+            <p class="text-xs text-stone-600 mb-3 leading-relaxed">
+              ${sc.desc}
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              ${sc.best.map(b => `
+                <span class="text-[11px] font-bold px-2 py-0.5 rounded bg-amber-50 text-amber-900 border border-amber-200">
+                  ${b}
+                </span>
+              `).join('')}
+            </div>
+          </div>
+          <button onclick="setQueryAndAnalyze('${sc.query.replace(/'/g, "\\'")}')" class="w-full py-2 bg-stone-100 hover:bg-amber-600 hover:text-white text-stone-800 text-xs font-semibold rounded-xl transition-colors">
+            Test Scenario Query
+          </button>
+        </div>
+      `).join('');
+    }
+
+    // Modal Control
+    function openWebsiteModal(siteId) {
+      const site = ALL_WEBSITES.find(s => s.id === siteId);
+      if (!site) return;
+
+      document.getElementById('modal-category').innerText = site.categoryLabel || site.category;
+      document.getElementById('modal-title').innerText = site.name;
+      document.getElementById('modal-domain').innerText = site.domain + (site.alias ? ' (' + site.alias + ')' : '');
+      document.getElementById('modal-used-for').innerText = site.usedFor;
+      document.getElementById('modal-year').innerText = site.launchYear;
+      document.getElementById('modal-pop').innerText = site.popularityScore + '/100';
+      document.getElementById('modal-visit-link').href = site.url;
+
+      const strengthsContainer = document.getElementById('modal-strengths');
+      strengthsContainer.innerHTML = (site.keyStrengths || []).map(s => `
+        <span class="text-xs px-2.5 py-1 rounded bg-stone-100 text-stone-700 font-medium">✓ ${s}</span>
+      `).join('') || '<span class="text-xs text-stone-400">None listed</span>';
+
+      const modal = document.getElementById('website-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    function closeWebsiteModal() {
+      const modal = document.getElementById('website-modal');
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+
+    // Close modal on escape
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeWebsiteModal();
+    });
+
+    // Search Controls
+    function handleSearchInput(val) {
+      const clearBtn = document.getElementById('clear-search-btn');
+      if (val.trim()) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+      const analysis = analyzeQuery(val);
+      renderIntentCard(analysis);
+    }
+
+    function handleSearchEnter() {
+      const input = document.getElementById('global-search-input');
+      const analysis = analyzeQuery(input.value);
+      renderIntentCard(analysis);
+      window.open(analysis.searchUrl, '_blank');
+    }
+
+    function clearSearchInput() {
+      const input = document.getElementById('global-search-input');
+      input.value = '';
+      document.getElementById('clear-search-btn').classList.add('hidden');
+      const analysis = analyzeQuery('everything');
+      renderIntentCard(analysis);
+    }
+
+    function setQueryAndAnalyze(query) {
+      const input = document.getElementById('global-search-input');
+      input.value = query;
+      document.getElementById('clear-search-btn').classList.remove('hidden');
+      const analysis = analyzeQuery(query);
+      renderIntentCard(analysis);
+      window.scrollTo({ top: 120, behavior: 'smooth' });
+    }
+
+    // Save Self Function
+    function downloadSelf() {
+      const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'AS.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    // Initialization
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCategoryPills();
+      renderDirectoryWebsites();
+      renderSpecializedHubs();
+      renderDecisionScenarios();
+
+      // Initial analysis
+      const initialAnalysis = analyzeQuery('everything');
+      renderIntentCard(initialAnalysis);
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
