@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AllSearch.com — What Every Website is Used For (Single-File AS.html)</title>
+  <title>AllSearch.com — What website do u need</title>
   <meta name="description" content="AllSearch.com: Single standalone file with all code and 77+ websites indexed across the web. Discover which websites are best for what, with specialized hubs and instant query routing.">
   
   <!-- Tailwind CSS via CDN -->
@@ -76,10 +76,10 @@
     <div class="max-w-7xl mx-auto w-full flex flex-wrap items-center justify-between gap-2">
       <div class="flex items-center gap-2">
         <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
-          SINGLE FILE: AS.HTML
+          <i data-lucide="file" class="w-3.5 h-3.5 text-amber-600"></i>SINGLE FILE
         </span>
         <span class="text-stone-300 hidden sm:inline">
-          Complete self-contained AllSearch edition &bull; Zero build tools required &bull; Works offline
+           self-contained edition &bull; Zero build tools required &bull; Works offline
         </span>
       </div>
       <div class="flex items-center gap-4 text-[11px] text-stone-400 font-mono">
@@ -131,7 +131,7 @@
       <div class="flex items-center gap-2">
         <button onclick="downloadSelf()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-stone-900 text-white hover:bg-stone-800 shadow transition-colors" title="Save this HTML file to your device">
           <i data-lucide="download" class="w-3.5 h-3.5"></i>
-          <span class="hidden sm:inline">Save AS.html</span>
+          <span class="hidden sm:inline">Get File Copy</span>
         </button>
       </div>
     </div>
@@ -145,7 +145,7 @@
         <span>The Universal Index of the Web</span>
       </div>
       <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-stone-900 leading-tight">
-        What is Every Website Used For?
+        Where Should We Start?
       </h1>
       <p class="mt-3 text-stone-600 text-sm sm:text-base max-w-2xl mx-auto">
         Type any query (e.g. <span class="font-semibold text-stone-900">everything</span>, <span class="font-semibold text-stone-900">coding</span>, <span class="font-semibold text-stone-900">gaming</span>, <span class="font-semibold text-stone-900">cars</span>, <span class="font-semibold text-stone-900">acronyms</span>) to see the best website for it and formulate direct searches.
@@ -160,7 +160,7 @@
           <input 
             type="text" 
             id="global-search-input" 
-            placeholder="Search intent or website: e.g. 'coding', 'everything', 'Elden Ring boss', 'horsepower'..."
+            placeholder="Search catalog, ask anything, or enter a URL (e.g. 'coding', 'github.com', 'weather')..."
             class="w-full px-3 py-2.5 sm:py-3 text-stone-900 text-sm sm:text-base outline-none bg-transparent placeholder-stone-400 font-medium"
             oninput="handleSearchInput(this.value)"
             onkeydown="if(event.key === 'Enter') handleSearchEnter()"
@@ -3168,17 +3168,99 @@
     let currentSortMode = 'popularity'; // 'popularity' | 'latest' | 'alpha'
     let activeTab = 'directory'; // 'directory' | 'specialized' | 'decision' | 'comparison'
 
+    // URL Detector and Normalizer
+    function isUrl(input) {
+      if (!input) return false;
+      const str = input.trim();
+      // Explicit protocol: http:// or https://
+      if (/^https?:\/\/[^\s]+$/i.test(str)) {
+        return true;
+      }
+      // www prefix
+      if (/^www\.[a-zA-Z0-9-]+\.[a-zA-Z]{2,}[^\s]*$/i.test(str)) {
+        return true;
+      }
+      // Domain with valid TLD (e.g. github.com, reddit.com/r/webdev, site.io, etc.)
+      if (/^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,24}(:\d+)?(\/[^\s]*)?$/i.test(str)) {
+        return true;
+      }
+      // Localhost with optional port
+      if (/^localhost(:\d+)?(\/[^\s]*)?$/i.test(str)) {
+        return true;
+      }
+      return false;
+    }
+
+    function normalizeUrl(input) {
+      let str = input.trim();
+      if (!/^https?:\/\//i.test(str)) {
+        str = 'https://' + str;
+      }
+      return str;
+    }
+
     // Intent Analyzer Function
     function analyzeQuery(rawQuery) {
       const query = (rawQuery || '').trim();
       const lower = query.toLowerCase();
 
+      // 1. Direct URL Input handling
+      if (isUrl(query)) {
+        const directUrl = normalizeUrl(query);
+        let hostname = '';
+        try {
+          hostname = new URL(directUrl).hostname;
+        } catch (e) {
+          hostname = query.replace(/^https?:\/\//i, '').split('/')[0];
+        }
+
+        // Check if catalog has an exact or domain match
+        const catalogMatch = ALL_WEBSITES.find(site => {
+          const siteHost = site.domain.toLowerCase();
+          return hostname.toLowerCase() === siteHost || hostname.toLowerCase().endsWith('.' + siteHost);
+        });
+
+        const targetSite = catalogMatch || {
+          id: 'custom-url',
+          name: hostname || query,
+          domain: hostname || query,
+          alias: 'Direct Web Destination',
+          url: directUrl,
+          category: 'url-navigation',
+          categoryLabel: 'Direct URL Navigation',
+          usedFor: 'Navigating directly to destination: ' + directUrl,
+          popularityScore: 100,
+          launchYear: 'Live',
+          keyStrengths: [
+            'Direct destination navigation',
+            'Opens typed URL immediately',
+            'Bypasses search engine intermediaries'
+          ],
+          tags: ['url', 'direct', 'destination'],
+          searchUrlPattern: directUrl
+        };
+
+        return {
+          query,
+          isDirectUrl: true,
+          intent: 'Direct URL Navigation',
+          bestMatch: targetSite,
+          confidence: 100,
+          whyBest: 'Direct destination URL detected. Launching ' + directUrl + ' directly in your browser.',
+          tips: 'Click "Open URL" or press Enter to navigate directly to ' + directUrl,
+          alternatives: catalogMatch ? ALL_WEBSITES.filter(s => s.category === catalogMatch.category && s.id !== catalogMatch.id).slice(0, 3) : [],
+          searchUrl: directUrl
+        };
+      }
+
+      // 2. Everything / All / Empty input -> Universal Google Index
       if (!query || lower === 'everything' || lower === 'all' || lower === 'all websites') {
         const google = ALL_WEBSITES.find(s => s.id === 'google') || ALL_WEBSITES[0];
         const wiki = ALL_WEBSITES.find(s => s.id === 'wikipedia');
         const yt = ALL_WEBSITES.find(s => s.id === 'youtube');
         return {
           query: query || 'everything',
+          isDirectUrl: false,
           intent: 'Universal Web Index (Everything on the Web)',
           bestMatch: google,
           confidence: 99,
@@ -3189,50 +3271,103 @@
         };
       }
 
-      // Score websites
+      // 3. Score catalog websites for specific intent
       const scored = ALL_WEBSITES.map(site => {
         let score = 0;
-        if (lower === site.name.toLowerCase() || lower === site.domain.toLowerCase()) score += 80;
-        else if (lower.includes(site.name.toLowerCase()) || lower.includes(site.domain.toLowerCase())) score += 45;
+        const siteLowerName = site.name.toLowerCase();
+        const siteLowerDomain = site.domain.toLowerCase();
+        const siteLowerAlias = (site.alias || '').toLowerCase();
 
-        for (const tag of (site.tags || [])) {
-          if (lower.includes(tag.toLowerCase())) score += 25;
+        // Exact matches
+        if (lower === siteLowerName || lower === siteLowerDomain || lower === siteLowerAlias) {
+          score += 85;
+        } else if (lower.includes(siteLowerDomain)) {
+          score += 55;
+        } else if (siteLowerName.length > 3 && lower.includes(siteLowerName)) {
+          score += 45;
         }
 
-        // Domain-specific boosts
-        if (site.id === 'game-search' && /\b(game|boss|mechanics|weakness|drop|loot|speedrun|elden|build)\b/i.test(lower)) score += 50;
-        if (site.id === 'def-search' && /\b(def|definition|meaning|acronym|etymology|jargon|lexicon|word)\b/i.test(lower)) score += 50;
-        if (site.id === 'car-search' && /\b(car|specs|horsepower|0-60|curb weight|engine|torque|honda|toyota|bmw|porsche)\b/i.test(lower)) score += 50;
-        if (site.id === 'blob-search' && /\b(blob|parquet|s3|bucket|dataset|binary|dump)\b/i.test(lower)) score += 50;
+        // Tags matching with word boundaries
+        for (const tag of (site.tags || [])) {
+          const t = tag.toLowerCase();
+          if (t.length >= 3) {
+            const escaped = t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            if (new RegExp('\\b' + escaped + '\\b', 'i').test(lower)) {
+              score += 25;
+            }
+          }
+        }
 
-        if (site.category === 'coding' && /\b(code|coding|dev|developer|programming|git|repo|syntax|debug|nextjs|react|typescript)\b/i.test(lower)) score += 40;
-        if (site.category === 'ai' && /\b(ai|llm|chatgpt|claude|prompt|model|weights)\b/i.test(lower)) score += 40;
-        if (site.category === 'shopping' && /\b(shop|shopping|buy|order|price|store|cart)\b/i.test(lower)) score += 40;
-        if (site.category === 'music-audio' && /\b(music|audio|song|listen|stream|beats|playlist)\b/i.test(lower)) score += 40;
+        // Specialized engines explicit boosts
+        if (site.id === 'game-search' && /\b(game|games|boss|mechanics|weakness|drop|loot|speedrun|elden|build|walkthrough)\b/i.test(lower)) score += 55;
+        if (site.id === 'def-search' && /\b(def|definition|meaning|acronym|etymology|jargon|lexicon|word|define)\b/i.test(lower)) score += 55;
+        if (site.id === 'car-search' && /\b(car|cars|specs|horsepower|0-60|curb weight|engine|torque|honda|toyota|bmw|porsche|audi|ford|edmunds)\b/i.test(lower)) score += 55;
+        if (site.id === 'blob-search' && /\b(blob|blobs|parquet|s3|bucket|dataset|binary|dump|safetensors)\b/i.test(lower)) score += 55;
+
+        // Categories explicit keywords
+        if (site.category === 'coding' && /\b(code|coding|dev|developer|programming|git|repo|syntax|debug|nextjs|react|typescript|python|javascript|leetcode|npm)\b/i.test(lower)) score += 40;
+        if (site.category === 'ai' && /\b(ai|llm|chatgpt|claude|prompt|model|weights|perplexity|midjourney)\b/i.test(lower)) score += 40;
+        if (site.category === 'shopping' && /\b(shop|shopping|buy|order|price|store|cart|purchase|amazon|ebay)\b/i.test(lower)) score += 40;
+        if (site.category === 'music-audio' && /\b(music|audio|song|listen|stream|beats|playlist|spotify)\b/i.test(lower)) score += 40;
+        if (site.category === 'video-streaming' && /\b(video|videos|stream|streaming|youtube|netflix|twitch|tiktok|movie|show)\b/i.test(lower)) score += 40;
+        
+        // Google Maps ONLY scores when map/navigation/location keywords are present
+        if (site.id === 'google-maps' && /\b(map|maps|directions|navigation|gps|traffic|street view|driving route|transit route)\b/i.test(lower)) {
+          score += 50;
+        }
 
         return { site, score };
       });
 
       scored.sort((a, b) => {
         if (b.score !== a.score) return b.score - a.score;
+        // Tie-breaker: prioritize Google if tied on score
+        if (a.site.id === 'google') return -1;
+        if (b.site.id === 'google') return 1;
+        // Never let Google Maps win a tie over general search
+        if (a.site.id === 'google-maps') return 1;
+        if (b.site.id === 'google-maps') return -1;
         return b.site.popularityScore - a.site.popularityScore;
       });
 
       const top = scored[0];
+      const google = ALL_WEBSITES.find(s => s.id === 'google') || ALL_WEBSITES[0];
+
+      // CRITICAL: If the query is NOT in all search (score < 25), default to Google!
+      if (!top || top.score < 25) {
+        return {
+          query,
+          isDirectUrl: false,
+          intent: 'Universal Web Search (Google)',
+          bestMatch: google,
+          confidence: 90,
+          whyBest: `"${query}" is not found in the specialized catalog. Google is the universal search engine indexing trillions of web pages for this query.`,
+          tips: 'Press Enter or click "Google" to search Google directly. You can also explore catalog categories below.',
+          alternatives: [
+            ALL_WEBSITES.find(s => s.id === 'wikipedia'),
+            ALL_WEBSITES.find(s => s.id === 'duckduckgo'),
+            ALL_WEBSITES.find(s => s.id === 'youtube')
+          ].filter(Boolean),
+          searchUrl: 'https://www.google.com/search?q=' + encodeURIComponent(query)
+        };
+      }
+
+      // Catalog match found
       const match = top.site;
-      const confidence = Math.min(99, Math.max(55, top.score + 25));
+      const confidence = Math.min(99, Math.max(60, top.score + 25));
       const searchUrl = match.searchUrlPattern 
         ? match.searchUrlPattern.replace('{q}', encodeURIComponent(query))
         : match.url;
 
       return {
         query,
-        intent: top.score > 20 ? match.categoryLabel + ' Query' : 'General Web Search',
+        isDirectUrl: false,
+        intent: top.score > 35 ? match.categoryLabel + ' Query' : 'Directory Match: ' + match.name,
         bestMatch: match,
         confidence,
         whyBest: match.name + ' (' + match.domain + ') is best for this: ' + match.usedFor,
         tips: (match.keyStrengths || []).join(' • '),
-        alternatives: scored.slice(1, 3).map(s => s.site),
+        alternatives: scored.slice(1, 4).filter(s => s.score > 0).map(s => s.site),
         searchUrl
       };
     }
@@ -3242,10 +3377,14 @@
       const container = document.getElementById('intent-result-card');
       const match = analysis.bestMatch;
 
+      const launchLabel = analysis.isDirectUrl 
+        ? 'Open URL' 
+        : (match.id === 'google' ? 'Search Google' : 'Launch Search');
+
       container.innerHTML = `
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-stone-200">
           <div class="flex items-center gap-2">
-            <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-amber-100 text-amber-800 border border-amber-300">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold ${analysis.isDirectUrl ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-amber-100 text-amber-800 border border-amber-300'}">
               ${analysis.intent}
             </span>
             <span class="text-xs font-mono text-stone-500">
@@ -3253,7 +3392,7 @@
             </span>
           </div>
           <div class="flex items-center gap-2">
-            <span class="text-xs text-stone-500">Best Match:</span>
+            <span class="text-xs text-stone-500">Destination:</span>
             <span class="text-xs font-black text-stone-900 bg-stone-100 px-2 py-0.5 rounded border border-stone-300">
               ${match.name}
             </span>
@@ -3269,15 +3408,17 @@
             <p class="text-xs text-stone-700 leading-relaxed">
               ${analysis.whyBest}
             </p>
-            ${analysis.tips ? `<p class="text-[11px] font-mono text-amber-800 mt-1">Strengths: ${analysis.tips}</p>` : ''}
+            ${analysis.tips ? `<p class="text-[11px] font-mono text-amber-800 mt-1">${analysis.tips}</p>` : ''}
           </div>
 
           <div class="shrink-0 flex items-center gap-2">
-            <button onclick="openWebsiteModal('${match.id}')" class="px-3.5 py-2 text-xs font-semibold text-stone-700 bg-stone-100 hover:bg-stone-200 rounded-xl transition-colors">
-              Details
-            </button>
-            <a href="${analysis.searchUrl}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 text-xs font-semibold text-white bg-amber-600 hover:bg-amber-700 rounded-xl flex items-center gap-1.5 shadow-sm transition-colors">
-              <span>Launch Search</span>
+            ${match.id !== 'custom-url' ? `
+              <button onclick="openWebsiteModal('${match.id}')" class="px-3.5 py-2 text-xs font-semibold text-stone-700 bg-stone-100 hover:bg-stone-200 rounded-xl transition-colors">
+                Details
+              </button>
+            ` : ''}
+            <a href="${analysis.searchUrl}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 text-xs font-semibold text-white ${analysis.isDirectUrl ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-amber-600 hover:bg-amber-700'} rounded-xl flex items-center gap-1.5 shadow-sm transition-colors">
+              <span>${launchLabel}</span>
               <i data-lucide="external-link" class="w-3 h-3"></i>
             </a>
           </div>
@@ -3693,6 +3834,21 @@
     });
 
     // Search Controls
+    function updateSearchButtonLabel(analysis) {
+      const launchBtn = document.getElementById('launch-search-btn');
+      if (!launchBtn) return;
+      const btnSpan = launchBtn.querySelector('span');
+      if (!btnSpan) return;
+
+      if (analysis.isDirectUrl) {
+        btnSpan.innerText = 'Go to URL';
+      } else if (analysis.bestMatch && analysis.bestMatch.id === 'google') {
+        btnSpan.innerText = 'Search Google';
+      } else {
+        btnSpan.innerText = 'Analyze';
+      }
+    }
+
     function handleSearchInput(val) {
       const clearBtn = document.getElementById('clear-search-btn');
       if (val.trim()) {
@@ -3702,13 +3858,17 @@
       }
       const analysis = analyzeQuery(val);
       renderIntentCard(analysis);
+      updateSearchButtonLabel(analysis);
     }
 
     function handleSearchEnter() {
       const input = document.getElementById('global-search-input');
-      const analysis = analyzeQuery(input.value);
+      const val = (input.value || '').trim();
+      const analysis = analyzeQuery(val || 'everything');
       renderIntentCard(analysis);
-      window.open(analysis.searchUrl, '_blank');
+      updateSearchButtonLabel(analysis);
+      // Opens typed URL, or Google search if not in AllSearch catalog, or catalog search
+      window.open(analysis.searchUrl, '_blank', 'noopener,noreferrer');
     }
 
     function clearSearchInput() {
@@ -3717,6 +3877,7 @@
       document.getElementById('clear-search-btn').classList.add('hidden');
       const analysis = analyzeQuery('everything');
       renderIntentCard(analysis);
+      updateSearchButtonLabel(analysis);
     }
 
     function setQueryAndAnalyze(query) {
@@ -3725,6 +3886,7 @@
       document.getElementById('clear-search-btn').classList.remove('hidden');
       const analysis = analyzeQuery(query);
       renderIntentCard(analysis);
+      updateSearchButtonLabel(analysis);
       window.scrollTo({ top: 120, behavior: 'smooth' });
     }
 
