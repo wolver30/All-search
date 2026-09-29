@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AllSearch.com — What website do u need</title>
+  <title>AllSearch.com — Universal web index</title>
   <meta name="description" content="AllSearch.com: Single standalone file with all code and 77+ websites indexed across the web. Discover which websites are best for what, with specialized hubs and instant query routing.">
   
   <!-- Tailwind CSS via CDN -->
@@ -79,7 +79,7 @@
           <i data-lucide="file" class="w-3.5 h-3.5 text-amber-600"></i>SINGLE FILE
         </span>
         <span class="text-stone-300 hidden sm:inline">
-           self-contained edition &bull; Zero build tools required &bull; Works offline
+          self-contained edition &bull; version 1.9 &bull; no build tools required
         </span>
       </div>
       <div class="flex items-center gap-4 text-[11px] text-stone-400 font-mono">
@@ -98,7 +98,7 @@
       <!-- Logo -->
       <a href="#home" onclick="switchTab('directory')" class="flex items-center gap-2.5 group">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center text-white font-black text-xl shadow-md group-hover:scale-105 transition-transform">
-          A
+          AS
         </div>
         <div>
           <div class="text-xl font-black tracking-tight flex items-center gap-1 leading-none text-stone-900">
@@ -131,7 +131,7 @@
       <div class="flex items-center gap-2">
         <button onclick="downloadSelf()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-stone-900 text-white hover:bg-stone-800 shadow transition-colors" title="Save this HTML file to your device">
           <i data-lucide="download" class="w-3.5 h-3.5"></i>
-          <span class="hidden sm:inline">Get File Copy</span>
+          <span class="hidden sm:inline">Get Offline Edition</span>
         </button>
       </div>
     </div>
@@ -177,7 +177,7 @@
             onclick="handleSearchEnter()" 
             class="px-4 sm:px-6 py-2.5 sm:py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold text-sm rounded-xl transition-colors flex items-center gap-1.5 shadow-sm whitespace-nowrap"
           >
-            <span>Analyze</span>
+            <span>Route</span>
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
         </div>
@@ -186,7 +186,7 @@
         <div class="mt-3 flex flex-wrap items-center justify-center gap-1.5 text-xs">
           <span class="text-stone-400 font-mono text-[11px] mr-1">Quick Queries:</span>
           <button onclick="setQueryAndAnalyze('everything')" class="px-2.5 py-1 bg-white hover:bg-amber-50 text-stone-700 hover:text-amber-900 rounded-md border border-stone-200 shadow-2xs transition-colors font-medium">
-            Everything
+            Browsers
           </button>
           <button onclick="setQueryAndAnalyze('coding')" class="px-2.5 py-1 bg-white hover:bg-amber-50 text-stone-700 hover:text-amber-900 rounded-md border border-stone-200 shadow-2xs transition-colors font-medium">
             Coding &amp; Dev
@@ -195,13 +195,13 @@
             Game Search (GS.com)
           </button>
           <button onclick="setQueryAndAnalyze('what does epistemic humility mean')" class="px-2.5 py-1 bg-white hover:bg-amber-50 text-stone-700 hover:text-amber-900 rounded-md border border-stone-200 shadow-2xs transition-colors font-medium">
-            DefSearch.net
+            DefSearch.net (DF.net)
           </button>
           <button onclick="setQueryAndAnalyze('2024 Honda Civic Type R specs')" class="px-2.5 py-1 bg-white hover:bg-amber-50 text-stone-700 hover:text-amber-900 rounded-md border border-stone-200 shadow-2xs transition-colors font-medium">
-            CarSearch.net
+            CarSearch.net (CS.net)
           </button>
           <button onclick="setQueryAndAnalyze('public s3 bucket climate parquet dataset')" class="px-2.5 py-1 bg-white hover:bg-amber-50 text-stone-700 hover:text-amber-900 rounded-md border border-stone-200 shadow-2xs transition-colors font-medium">
-            BlobSearch.com
+            BlobSearch.com (BS.com)
           </button>
           <button onclick="setQueryAndAnalyze('buy noise cancelling headphones')" class="px-2.5 py-1 bg-white hover:bg-amber-50 text-stone-700 hover:text-amber-900 rounded-md border border-stone-200 shadow-2xs transition-colors font-medium">
             Shopping
